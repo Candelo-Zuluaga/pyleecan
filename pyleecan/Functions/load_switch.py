@@ -96,6 +96,7 @@ load_switch = {
     "LamSlotMag": LamSlotMag,
     "LamSlotMagNS": LamSlotMagNS,
     "LamSlotMulti": LamSlotMulti,
+    "LamSlotMultiMagWind": LamSlotMultiMagWind,
     "LamSlotMultiWind": LamSlotMultiWind,
     "LamSlotWind": LamSlotWind,
     "LamSquirrelCage": LamSquirrelCage,
