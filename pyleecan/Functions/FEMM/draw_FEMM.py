@@ -92,7 +92,7 @@ def draw_FEMM(
     FEMM_dict : dict
         dictionary containing the main parameters of FEMM (including circuits and materials)
     """
-
+    
     if transform_list not in [None, list()] and is_fast_draw:
         is_fast_draw = False
         output.get_logger().debug("Removing fast_draw for transform_list in FEMM")
@@ -101,7 +101,7 @@ def draw_FEMM(
     Is = output.elec.Is  # Stator currents waveforms
     Ir = output.elec.Ir  # Rotor currents waveforms
     machine = output.simu.machine
-
+    
     # Computing parameter (element size, arcspan...) needed to define the simulation
     FEMM_dict = comp_FEMM_dict(
         machine,
@@ -159,10 +159,10 @@ def draw_FEMM(
 
     # Lamination list organized from interior to exterior
     lam_list = machine_edit.get_lam_list(is_int_to_ext=True)
-
+    
     # Init Boundary condition dict (will be filled while drawing Surface/Lines)
     BC_dict = {"sym": sym, "is_antiper": is_antiper}
-
+    
     # Draw all the laminations
     for lam in lam_list:
         if lam.is_stator:
@@ -186,7 +186,6 @@ def draw_FEMM(
             type_BH_rotor,
             is_fast_draw,
         )
-
     # List of the Non lamination related surfaces
     other_surf_list = list()
 

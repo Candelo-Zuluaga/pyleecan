@@ -28,9 +28,7 @@ except ImportError as error:
     convert_to_P = error
 
 try:
-    from ..Methods.Converter.Convert.select_LamSlotWind_rules import (
-        select_LamSlotWind_rules,
-    )
+    from ..Methods.Converter.Convert.select_LamSlotWind_rules import select_LamSlotWind_rules
 except ImportError as error:
     select_LamSlotWind_rules = error
 
@@ -40,9 +38,7 @@ except ImportError as error:
     select_machine_rules = error
 
 try:
-    from ..Methods.Converter.Convert.Step.select_slot_rotor_rules import (
-        select_slot_rotor_rules,
-    )
+    from ..Methods.Converter.Convert.Step.select_slot_rotor_rules import select_slot_rotor_rules
 except ImportError as error:
     select_slot_rotor_rules = error
 
@@ -52,23 +48,17 @@ except ImportError as error:
     select_slot_rules = error
 
 try:
-    from ..Methods.Converter.Convert.Step.select_lamination_rules import (
-        select_lamination_rules,
-    )
+    from ..Methods.Converter.Convert.Step.select_lamination_rules import select_lamination_rules
 except ImportError as error:
     select_lamination_rules = error
 
 try:
-    from ..Methods.Converter.Convert.Step.select_winding_rules import (
-        select_winding_rules,
-    )
+    from ..Methods.Converter.Convert.Step.select_winding_rules import select_winding_rules
 except ImportError as error:
     select_winding_rules = error
 
 try:
-    from ..Methods.Converter.Convert.Step.select_conductor_rules import (
-        select_conductor_rules,
-    )
+    from ..Methods.Converter.Convert.Step.select_conductor_rules import select_conductor_rules
 except ImportError as error:
     select_conductor_rules = error
 
@@ -108,37 +98,27 @@ except ImportError as error:
     select_notch_rules = error
 
 try:
-    from ..Methods.Converter.Convert.Step.select_material_rules import (
-        select_material_rules,
-    )
+    from ..Methods.Converter.Convert.Step.select_material_rules import select_material_rules
 except ImportError as error:
     select_material_rules = error
 
 try:
-    from ..Methods.Converter.Convert.machine_type.select_SIPMSM_rules import (
-        select_SIPMSM_rules,
-    )
+    from ..Methods.Converter.Convert.machine_type.select_SIPMSM_rules import select_SIPMSM_rules
 except ImportError as error:
     select_SIPMSM_rules = error
 
 try:
-    from ..Methods.Converter.Convert.machine_type.select_IPMSM_rules import (
-        select_IPMSM_rules,
-    )
+    from ..Methods.Converter.Convert.machine_type.select_IPMSM_rules import select_IPMSM_rules
 except ImportError as error:
     select_IPMSM_rules = error
 
 try:
-    from ..Methods.Converter.Convert.machine_type.select_SCIM_rules import (
-        select_SCIM_rules,
-    )
+    from ..Methods.Converter.Convert.machine_type.select_SCIM_rules import select_SCIM_rules
 except ImportError as error:
     select_SCIM_rules = error
 
 try:
-    from ..Methods.Converter.Convert.machine_type.select_WRSM_rules import (
-        select_WRSM_rules,
-    )
+    from ..Methods.Converter.Convert.machine_type.select_WRSM_rules import select_WRSM_rules
 except ImportError as error:
     select_WRSM_rules = error
 
@@ -158,8 +138,7 @@ class Convert(FrozenClass):
         convert_to_other = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use Convert method convert_to_other: "
-                    + str(convert_to_other)
+                    "Can't use Convert method convert_to_other: " + str(convert_to_other)
                 )
             )
         )
@@ -313,8 +292,7 @@ class Convert(FrozenClass):
         select_bar_rules = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use Convert method select_bar_rules: "
-                    + str(select_bar_rules)
+                    "Can't use Convert method select_bar_rules: " + str(select_bar_rules)
                 )
             )
         )
@@ -409,16 +387,7 @@ class Convert(FrozenClass):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        other_unit_dict=-1,
-        other_dict=-1,
-        machine=None,
-        rules_list=-1,
-        is_P_to_other=False,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, other_unit_dict=-1, other_dict=-1, machine=None, rules_list=-1, is_P_to_other=False, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -467,15 +436,10 @@ class Convert(FrozenClass):
         Convert_str += "other_dict = " + str(self.other_dict) + linesep
         if self.machine is not None:
             tmp = self.machine.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            Convert_str += "machine = " + tmp
+            Convert_str += "machine = "+ tmp
         else:
             Convert_str += "machine = None" + linesep + linesep
-        Convert_str += (
-            "rules_list = "
-            + linesep
-            + str(self.rules_list).replace(linesep, linesep + "\t")
-            + linesep
-        )
+        Convert_str += "rules_list = " + linesep + str(self.rules_list).replace(linesep, linesep + "\t") + linesep
         Convert_str += "is_P_to_other = " + str(self.is_P_to_other) + linesep
         return Convert_str
 
@@ -496,77 +460,44 @@ class Convert(FrozenClass):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
         if other._other_unit_dict != self._other_unit_dict:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._other_unit_dict)
-                    + ", other="
-                    + str(other._other_unit_dict)
-                    + ")"
-                )
-                diff_list.append(name + ".other_unit_dict" + val_str)
+                val_str = ' (self='+str(self._other_unit_dict)+', other='+str(other._other_unit_dict)+')'
+                diff_list.append(name+'.other_unit_dict'+val_str)
             else:
-                diff_list.append(name + ".other_unit_dict")
+                diff_list.append(name+'.other_unit_dict')
         if other._other_dict != self._other_dict:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._other_dict)
-                    + ", other="
-                    + str(other._other_dict)
-                    + ")"
-                )
-                diff_list.append(name + ".other_dict" + val_str)
+                val_str = ' (self='+str(self._other_dict)+', other='+str(other._other_dict)+')'
+                diff_list.append(name+'.other_dict'+val_str)
             else:
-                diff_list.append(name + ".other_dict")
-        if (other.machine is None and self.machine is not None) or (
-            other.machine is not None and self.machine is None
-        ):
-            diff_list.append(name + ".machine None mismatch")
+                diff_list.append(name+'.other_dict')
+        if (other.machine is None and self.machine is not None) or (other.machine is not None and self.machine is None):
+            diff_list.append(name+'.machine None mismatch')
         elif self.machine is not None:
-            diff_list.extend(
-                self.machine.compare(
-                    other.machine,
-                    name=name + ".machine",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
+            diff_list.extend(self.machine.compare(other.machine,name=name+'.machine',ignore_list=ignore_list,is_add_value=is_add_value))
         if other._rules_list != self._rules_list:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._rules_list)
-                    + ", other="
-                    + str(other._rules_list)
-                    + ")"
-                )
-                diff_list.append(name + ".rules_list" + val_str)
+                val_str = ' (self='+str(self._rules_list)+', other='+str(other._rules_list)+')'
+                diff_list.append(name+'.rules_list'+val_str)
             else:
-                diff_list.append(name + ".rules_list")
+                diff_list.append(name+'.rules_list')
         if other._is_P_to_other != self._is_P_to_other:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._is_P_to_other)
-                    + ", other="
-                    + str(other._is_P_to_other)
-                    + ")"
-                )
-                diff_list.append(name + ".is_P_to_other" + val_str)
+                val_str = ' (self='+str(self._is_P_to_other)+', other='+str(other._is_P_to_other)+')'
+                diff_list.append(name+'.is_P_to_other'+val_str)
             else:
-                diff_list.append(name + ".is_P_to_other")
+                diff_list.append(name+'.is_P_to_other')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -593,7 +524,7 @@ class Convert(FrozenClass):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
@@ -607,11 +538,7 @@ class Convert(FrozenClass):
         if self.machine is None:
             Convert_dict["machine"] = None
         else:
-            Convert_dict["machine"] = self.machine.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            Convert_dict["machine"] = self.machine.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         Convert_dict["rules_list"] = (
             self.rules_list.copy() if self.rules_list is not None else None
         )
@@ -619,6 +546,7 @@ class Convert(FrozenClass):
         # The class name is added to the dict for deserialisation purpose
         Convert_dict["__class__"] = "Convert"
         return Convert_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -642,13 +570,7 @@ class Convert(FrozenClass):
             rules_list_val = self.rules_list.copy()
         is_P_to_other_val = self.is_P_to_other
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            other_unit_dict=other_unit_dict_val,
-            other_dict=other_dict_val,
-            machine=machine_val,
-            rules_list=rules_list_val,
-            is_P_to_other=is_P_to_other_val,
-        )
+        obj_copy = type(self)(other_unit_dict=other_unit_dict_val,other_dict=other_dict_val,machine=machine_val,rules_list=rules_list_val,is_P_to_other=is_P_to_other_val)
         return obj_copy
 
     def _set_None(self):
@@ -675,7 +597,7 @@ class Convert(FrozenClass):
     other_unit_dict = property(
         fget=_get_other_unit_dict,
         fset=_set_other_unit_dict,
-        doc="""convertion unit file .mot into unit_dict
+        doc=u"""convertion unit file .mot into unit_dict
 
         :Type: dict
         """,
@@ -695,7 +617,7 @@ class Convert(FrozenClass):
     other_dict = property(
         fget=_get_other_dict,
         fset=_set_other_dict,
-        doc="""convertion file .mot in dict
+        doc=u"""convertion file .mot in dict
 
         :Type: dict
         """,
@@ -711,28 +633,23 @@ class Convert(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "machine"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'machine')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Machine = import_class("pyleecan.Classes", "Machine", "machine")
+            Machine = import_class('pyleecan.Classes', 'Machine', 'machine')
             value = Machine()
         check_var("machine", value, "Machine")
         self._machine = value
 
         if self._machine is not None:
             self._machine.parent = self
-
     machine = property(
         fget=_get_machine,
         fset=_set_machine,
-        doc="""machine pyleecan
+        doc=u"""machine pyleecan
 
         :Type: Machine
         """,
@@ -752,7 +669,7 @@ class Convert(FrozenClass):
     rules_list = property(
         fget=_get_rules_list,
         fset=_set_rules_list,
-        doc="""list differents rules
+        doc=u"""list differents rules
 
         :Type: list
         """,
@@ -770,7 +687,7 @@ class Convert(FrozenClass):
     is_P_to_other = property(
         fget=_get_is_P_to_other,
         fset=_set_is_P_to_other,
-        doc="""booleen to select the direction of conversion
+        doc=u"""booleen to select the direction of conversion
 
         :Type: bool
         """,

@@ -2062,7 +2062,7 @@
                 "name": "Jrms_max",
                 "size": "",
                 "type": "float",
-                "unit": "A/m\u00b2",
+                "unit": "A/m\u00c2\u00b2",
                 "value": null
             },
             {
@@ -6537,6 +6537,7 @@
             }
         ],
         "daughters": [
+            "LamSlotMultiMagWind",
             "LamSlotMultiWind"
         ],
         "desc": "Lamination with list of Slot",
@@ -6588,6 +6589,107 @@
                 "size": "",
                 "type": "dict",
                 "unit": "",
+                "value": null
+            }
+        ]
+    },
+    "LamSlotMultiMagWind": {
+        "constants": [
+            {
+                "name": "VERSION",
+                "value": "1"
+            }
+        ],
+        "daughters": [],
+        "desc": "Lamination with list of Slot filled with winding",
+        "is_internal": false,
+        "methods": [
+            "plot",
+            "build_geometry",
+            "get_pole_pair_number",
+            "comp_mmf_dir",
+            "plot_mmf_unit",
+            "comp_mmf_unit",
+            "comp_wind_function",
+            "comp_angle_d_axis",
+            "get_dim_active",
+            "get_all_mag_obj",
+            "get_magnet_by_label",
+            "get_Zs",
+            "plot",
+            "get_magnet_number",
+            "comp_periodicity_geo",
+            "comp_periodicity_spatial"
+        ],
+        "mother": "LamSlotMulti",
+        "name": "LamSlotMultiMagWind",
+        "package": "Machine",
+        "path": "pyleecan/Generator/ClassesRef/Machine/LamSlotMultiMagWind.csv",
+        "properties": [
+            {
+                "as_dict": "",
+                "desc": "Imposed Slot Fill factor (if None, will be computed according to the winding and the slot)",
+                "max": "1",
+                "min": "0",
+                "name": "Ksfill",
+                "size": "",
+                "type": "float",
+                "unit": "-",
+                "value": null
+            },
+            {
+                "as_dict": "",
+                "desc": "Lamination's Winding",
+                "max": "",
+                "min": "",
+                "name": "winding",
+                "size": "",
+                "type": "Winding",
+                "unit": "",
+                "value": ""
+            },
+            {
+                "as_dict": "",
+                "desc": "Lamination's Magnet",
+                "max": "",
+                "min": "",
+                "name": "magnet",
+                "size": "",
+                "type": "Magnet",
+                "unit": "",
+                "value": ""
+            },
+            {
+                "as_dict": "",
+                "desc": "List indicating if the lamination is winding 'W' mag 'M' or empty 'E'",
+                "max": "",
+                "min": "",
+                "name": "type_list",
+                "size": "",
+                "type": "ndarray",
+                "unit": "",
+                "value": ""
+            },
+            {
+                "as_dict": "",
+                "desc": "Matrix to enforce a different relative magnetic permeability for each magnet layer (shape: [Nrad, Ntan, Zs])",
+                "max": "",
+                "min": "",
+                "name": "mur_lin_matrix",
+                "size": "",
+                "type": "ndarray",
+                "unit": "-",
+                "value": null
+            },
+            {
+                "as_dict": "",
+                "desc": "Matrix to enforce a different magnet remanence induction at 20degC for each magnet layer (shape: [Nrad, Ntan, Zs])",
+                "max": "",
+                "min": "",
+                "name": "Brm20_matrix",
+                "size": "",
+                "type": "ndarray",
+                "unit": "-",
                 "value": null
             }
         ]
@@ -6826,6 +6928,7 @@
             "LamSlotMag",
             "LamSlotMagNS",
             "LamSlotMulti",
+            "LamSlotMultiMagWind",
             "LamSlotMultiWind",
             "LamSlotWind",
             "LamSquirrelCage",
@@ -11269,7 +11372,7 @@
                 "name": "Jrms",
                 "size": "",
                 "type": "float",
-                "unit": "A/m\u00b2",
+                "unit": "A/m\u00c2\u00b2",
                 "value": null
             },
             {

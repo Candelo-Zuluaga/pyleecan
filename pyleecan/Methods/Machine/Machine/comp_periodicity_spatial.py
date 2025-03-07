@@ -16,19 +16,18 @@ def comp_periodicity_spatial(self):
     is_apera : bool
         True if an anti-periodicity is possible after the periodicities
     """
-
     p = self.get_pole_pair_number()
 
     # Get stator (anti)-periodicity in spatial domain
     pera_s, is_antipera_s = self.stator.comp_periodicity_spatial()
-
+    print("pera_s: ", pera_s, "is_antipera_s: ", is_antipera_s)
     # Get rotor (anti)-periodicities in spatial domain
     pera_r, is_antipera_r = self.rotor.comp_periodicity_spatial()
-
+    print("pera_r: ", pera_r, "is_antipera_r: ", is_antipera_r)
     # Get machine spatial periodicity
     pera = int(gcd(gcd(pera_s, pera_r), p))
 
     # Get machine time and spatial anti-periodicities
     is_apera = bool(is_antipera_s and is_antipera_r)
-
+    print("pera: ", pera, "is_apera: ", is_apera)
     return pera, is_apera

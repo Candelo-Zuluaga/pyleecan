@@ -17,7 +17,6 @@ def get_machine_periodicity(self, is_rotor_ref=False):
     is_antisym_t : bool
         True if an anti-periodicity is possible after the time periodicities (in static or rotating referential)
     """
-
     if (
         self.geo.per_a is None
         or self.geo.is_antiper_a is None

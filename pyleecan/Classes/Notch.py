@@ -102,7 +102,7 @@ class Notch(FrozenClass):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(self, key_mat=None, init_dict=None, init_str=None):
+    def __init__(self, key_mat=None, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -137,7 +137,7 @@ class Notch(FrozenClass):
             Notch_str += "parent = " + str(type(self.parent)) + " object" + linesep
         if self.key_mat is not None:
             tmp = self.key_mat.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            Notch_str += "key_mat = " + tmp
+            Notch_str += "key_mat = "+ tmp
         else:
             Notch_str += "key_mat = None" + linesep + linesep
         return Notch_str
@@ -151,29 +151,20 @@ class Notch(FrozenClass):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
-        if (other.key_mat is None and self.key_mat is not None) or (
-            other.key_mat is not None and self.key_mat is None
-        ):
-            diff_list.append(name + ".key_mat None mismatch")
+        if (other.key_mat is None and self.key_mat is not None) or (other.key_mat is not None and self.key_mat is None):
+            diff_list.append(name+'.key_mat None mismatch')
         elif self.key_mat is not None:
-            diff_list.extend(
-                self.key_mat.compare(
-                    other.key_mat,
-                    name=name + ".key_mat",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
+            diff_list.extend(self.key_mat.compare(other.key_mat,name=name+'.key_mat',ignore_list=ignore_list,is_add_value=is_add_value))
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -190,7 +181,7 @@ class Notch(FrozenClass):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
@@ -198,14 +189,11 @@ class Notch(FrozenClass):
         if self.key_mat is None:
             Notch_dict["key_mat"] = None
         else:
-            Notch_dict["key_mat"] = self.key_mat.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            Notch_dict["key_mat"] = self.key_mat.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         # The class name is added to the dict for deserialisation purpose
         Notch_dict["__class__"] = "Notch"
         return Notch_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -235,28 +223,23 @@ class Notch(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "key_mat"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'key_mat')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Material = import_class("pyleecan.Classes", "Material", "key_mat")
+            Material = import_class('pyleecan.Classes', 'Material', 'key_mat')
             value = Material()
         check_var("key_mat", value, "Material")
         self._key_mat = value
 
         if self._key_mat is not None:
             self._key_mat.parent = self
-
     key_mat = property(
         fget=_get_key_mat,
         fset=_set_key_mat,
-        doc="""The material of the key (if None, no key to add)
+        doc=u"""The material of the key (if None, no key to add)
 
         :Type: Material
         """,

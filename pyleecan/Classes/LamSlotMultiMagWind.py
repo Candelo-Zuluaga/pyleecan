@@ -62,6 +62,41 @@ try:
 except ImportError as error:
     get_dim_active = error
 
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.get_all_mag_obj import get_all_mag_obj
+except ImportError as error:
+    get_all_mag_obj = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.get_magnet_by_label import get_magnet_by_label
+except ImportError as error:
+    get_magnet_by_label = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.get_Zs import get_Zs
+except ImportError as error:
+    get_Zs = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.plot import plot
+except ImportError as error:
+    plot = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.get_magnet_number import get_magnet_number
+except ImportError as error:
+    get_magnet_number = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.comp_periodicity_geo import comp_periodicity_geo
+except ImportError as error:
+    comp_periodicity_geo = error
+
+try:
+    from ..Methods.Machine.LamSlotMultiMagWind.comp_periodicity_spatial import comp_periodicity_spatial
+except ImportError as error:
+    comp_periodicity_spatial = error
+
 
 from numpy import array, array_equal
 from numpy import isnan
@@ -179,6 +214,86 @@ class LamSlotMultiMagWind(LamSlotMulti):
         )
     else:
         get_dim_active = get_dim_active
+    # cf Methods.Machine.LamSlotMultiMagWind.get_all_mag_obj
+    if isinstance(get_all_mag_obj, ImportError):
+        get_all_mag_obj = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method get_all_mag_obj: "
+                    + str(get_all_mag_obj)
+                )
+            )
+        )
+    else:
+        get_all_mag_obj = get_all_mag_obj
+    # cf Methods.Machine.LamSlotMultiMagWind.get_magnet_by_label
+    if isinstance(get_magnet_by_label, ImportError):
+        get_magnet_by_label = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method get_magnet_by_label: "
+                    + str(get_magnet_by_label)
+                )
+            )
+        )
+    else:
+        get_magnet_by_label = get_magnet_by_label
+    # cf Methods.Machine.LamSlotMultiMagWind.get_Zs
+    if isinstance(get_Zs, ImportError):
+        get_Zs = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method get_Zs: " + str(get_Zs)
+                )
+            )
+        )
+    else:
+        get_Zs = get_Zs
+    # cf Methods.Machine.LamSlotMultiMagWind.plot
+    if isinstance(plot, ImportError):
+        plot = property(
+            fget=lambda x: raise_(
+                ImportError("Can't use LamSlotMultiMagWind method plot: " + str(plot))
+            )
+        )
+    else:
+        plot = plot
+    # cf Methods.Machine.LamSlotMultiMagWind.get_magnet_number
+    if isinstance(get_magnet_number, ImportError):
+        get_magnet_number = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method get_magnet_number: "
+                    + str(get_magnet_number)
+                )
+            )
+        )
+    else:
+        get_magnet_number = get_magnet_number
+    # cf Methods.Machine.LamSlotMultiMagWind.comp_periodicity_geo
+    if isinstance(comp_periodicity_geo, ImportError):
+        comp_periodicity_geo = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method comp_periodicity_geo: "
+                    + str(comp_periodicity_geo)
+                )
+            )
+        )
+    else:
+        comp_periodicity_geo = comp_periodicity_geo
+    # cf Methods.Machine.LamSlotMultiMagWind.comp_periodicity_spatial
+    if isinstance(comp_periodicity_spatial, ImportError):
+        comp_periodicity_spatial = property(
+            fget=lambda x: raise_(
+                ImportError(
+                    "Can't use LamSlotMultiMagWind method comp_periodicity_spatial: "
+                    + str(comp_periodicity_spatial)
+                )
+            )
+        )
+    else:
+        comp_periodicity_spatial = comp_periodicity_spatial
     # generic save method is available in all object
     save = save
     # get_logger method is available in all object

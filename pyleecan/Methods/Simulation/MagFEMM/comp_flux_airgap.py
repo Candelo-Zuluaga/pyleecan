@@ -39,7 +39,7 @@ def comp_flux_airgap(self, output, axes_dict, Is_val=None, Ir_val=None):
             meshsolution: MeshSolution
                 MeshSolution object containing magnetic quantities B, H, mu for each time step
     """
-
+    
     logger = self.get_logger()
 
     # Init output
@@ -53,7 +53,7 @@ def comp_flux_airgap(self, output, axes_dict, Is_val=None, Ir_val=None):
 
     # Set the angular symmetry factor according to the machine and check if it is anti-periodic
     sym, is_antiper_a = Angle.get_periodicity()
-
+    #print(f"The Simmetry: {sym} and the periodicity: {is_antiper_a}")
     # Import angular vector from Data object
     angle = Angle.get_values(
         is_oneperiod=self.is_periodicity_a,
@@ -113,7 +113,6 @@ def comp_flux_airgap(self, output, axes_dict, Is_val=None, Ir_val=None):
             FEMM_dict = output.mag.internal.FEMM_dict
         else:
             FEMM_dict = self.FEMM_dict_enforced
-
     # Init flux arrays in out_dict
     out_dict["B_{rad}"] = zeros((Nt, Na))
     out_dict["B_{circ}"] = zeros((Nt, Na))

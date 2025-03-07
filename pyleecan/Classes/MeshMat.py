@@ -154,8 +154,7 @@ class MeshMat(Mesh):
         get_element_area = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use MeshMat method get_element_area: "
-                    + str(get_element_area)
+                    "Can't use MeshMat method get_element_area: " + str(get_element_area)
                 )
             )
         )
@@ -178,8 +177,7 @@ class MeshMat(Mesh):
         get_node2element = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use MeshMat method get_node2element: "
-                    + str(get_node2element)
+                    "Can't use MeshMat method get_node2element: " + str(get_node2element)
                 )
             )
         )
@@ -277,17 +275,7 @@ class MeshMat(Mesh):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        element_dict=-1,
-        node=-1,
-        _is_renum=False,
-        sym=1,
-        is_antiper_a=False,
-        dimension=2,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, element_dict=-1, node=-1, _is_renum=False, sym=1, is_antiper_a=False, dimension=2, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -333,16 +321,13 @@ class MeshMat(Mesh):
         # Get the properties inherited from Mesh
         MeshMat_str += super(MeshMat, self).__str__()
         if len(self.element_dict) == 0:
-            MeshMat_str += "element_dict = dict()" + linesep
+            MeshMat_str += "element_dict = dict()"+linesep
         for key, obj in self.element_dict.items():
-            tmp = (
-                self.element_dict[key].__str__().replace(linesep, linesep + "\t")
-                + linesep
-            )
-            MeshMat_str += "element_dict[" + key + "] =" + tmp + linesep + linesep
+            tmp = self.element_dict[key].__str__().replace(linesep, linesep + "\t") + linesep 
+            MeshMat_str += "element_dict["+key+"] ="+ tmp + linesep + linesep
         if self.node is not None:
             tmp = self.node.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            MeshMat_str += "node = " + tmp
+            MeshMat_str += "node = "+ tmp
         else:
             MeshMat_str += "node = None" + linesep + linesep
         MeshMat_str += "_is_renum = " + str(self._is_renum) + linesep
@@ -371,86 +356,50 @@ class MeshMat(Mesh):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Mesh
-        diff_list.extend(
-            super(MeshMat, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
-        if (other.element_dict is None and self.element_dict is not None) or (
-            other.element_dict is not None and self.element_dict is None
-        ):
-            diff_list.append(name + ".element_dict None mismatch")
+        diff_list.extend(super(MeshMat, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
+        if (other.element_dict is None and self.element_dict is not None) or (other.element_dict is not None and self.element_dict is None):
+            diff_list.append(name+'.element_dict None mismatch')
         elif self.element_dict is None:
             pass
         elif len(other.element_dict) != len(self.element_dict):
-            diff_list.append("len(" + name + "element_dict)")
+            diff_list.append('len('+name+'element_dict)')
         else:
             for key in self.element_dict:
-                diff_list.extend(
-                    self.element_dict[key].compare(
-                        other.element_dict[key],
-                        name=name + ".element_dict[" + str(key) + "]",
-                        ignore_list=ignore_list,
-                        is_add_value=is_add_value,
-                    )
-                )
-        if (other.node is None and self.node is not None) or (
-            other.node is not None and self.node is None
-        ):
-            diff_list.append(name + ".node None mismatch")
+                diff_list.extend(self.element_dict[key].compare(other.element_dict[key],name=name+'.element_dict['+str(key)+']',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.node is None and self.node is not None) or (other.node is not None and self.node is None):
+            diff_list.append(name+'.node None mismatch')
         elif self.node is not None:
-            diff_list.extend(
-                self.node.compare(
-                    other.node,
-                    name=name + ".node",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
+            diff_list.extend(self.node.compare(other.node,name=name+'.node',ignore_list=ignore_list,is_add_value=is_add_value))
         if other.__is_renum != self.__is_renum:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self.__is_renum)
-                    + ", other="
-                    + str(other.__is_renum)
-                    + ")"
-                )
-                diff_list.append(name + "._is_renum" + val_str)
+                val_str = ' (self='+str(self.__is_renum)+', other='+str(other.__is_renum)+')'
+                diff_list.append(name+'._is_renum'+val_str)
             else:
-                diff_list.append(name + "._is_renum")
+                diff_list.append(name+'._is_renum')
         if other._sym != self._sym:
             if is_add_value:
-                val_str = (
-                    " (self=" + str(self._sym) + ", other=" + str(other._sym) + ")"
-                )
-                diff_list.append(name + ".sym" + val_str)
+                val_str = ' (self='+str(self._sym)+', other='+str(other._sym)+')'
+                diff_list.append(name+'.sym'+val_str)
             else:
-                diff_list.append(name + ".sym")
+                diff_list.append(name+'.sym')
         if other._is_antiper_a != self._is_antiper_a:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._is_antiper_a)
-                    + ", other="
-                    + str(other._is_antiper_a)
-                    + ")"
-                )
-                diff_list.append(name + ".is_antiper_a" + val_str)
+                val_str = ' (self='+str(self._is_antiper_a)+', other='+str(other._is_antiper_a)+')'
+                diff_list.append(name+'.is_antiper_a'+val_str)
             else:
-                diff_list.append(name + ".is_antiper_a")
+                diff_list.append(name+'.is_antiper_a')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -476,37 +425,25 @@ class MeshMat(Mesh):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Mesh
-        MeshMat_dict = super(MeshMat, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        MeshMat_dict = super(MeshMat, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.element_dict is None:
             MeshMat_dict["element_dict"] = None
         else:
             MeshMat_dict["element_dict"] = dict()
             for key, obj in self.element_dict.items():
                 if obj is not None:
-                    MeshMat_dict["element_dict"][key] = obj.as_dict(
-                        type_handle_ndarray=type_handle_ndarray,
-                        keep_function=keep_function,
-                        **kwargs
-                    )
+                    MeshMat_dict["element_dict"][key] = obj.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
                 else:
                     MeshMat_dict["element_dict"][key] = None
         if self.node is None:
             MeshMat_dict["node"] = None
         else:
-            MeshMat_dict["node"] = self.node.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            MeshMat_dict["node"] = self.node.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         MeshMat_dict["_is_renum"] = self._is_renum
         MeshMat_dict["sym"] = self.sym
         MeshMat_dict["is_antiper_a"] = self.is_antiper_a
@@ -514,6 +451,7 @@ class MeshMat(Mesh):
         # Overwrite the mother class name
         MeshMat_dict["__class__"] = "MeshMat"
         return MeshMat_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -534,14 +472,7 @@ class MeshMat(Mesh):
         is_antiper_a_val = self.is_antiper_a
         dimension_val = self.dimension
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            element_dict=element_dict_val,
-            node=node_val,
-            _is_renum=_is_renum_val,
-            sym=sym_val,
-            is_antiper_a=is_antiper_a_val,
-            dimension=dimension_val,
-        )
+        obj_copy = type(self)(element_dict=element_dict_val,node=node_val,_is_renum=_is_renum_val,sym=sym_val,is_antiper_a=is_antiper_a_val,dimension=dimension_val)
         return obj_copy
 
     def _set_None(self):
@@ -572,15 +503,11 @@ class MeshMat(Mesh):
                     try:
                         obj = load_init_dict(obj)[1]
                     except Exception as e:
-                        self.get_logger().error(
-                            "Error while loading " + obj + ", setting None instead"
-                        )
+                        self.get_logger().error('Error while loading '+obj+', setting None instead')
                         obj = None
                         value[key] = None
                 if type(obj) is dict:
-                    class_obj = import_class(
-                        "pyleecan.Classes", obj.get("__class__"), "element_dict"
-                    )
+                    class_obj = import_class('pyleecan.Classes', obj.get('__class__'), 'element_dict')
                     value[key] = class_obj(init_dict=obj)
         if type(value) is int and value == -1:
             value = dict()
@@ -590,7 +517,7 @@ class MeshMat(Mesh):
     element_dict = property(
         fget=_get_element_dict,
         fset=_set_element_dict,
-        doc="""Storing connectivity
+        doc=u"""Storing connectivity
 
         :Type: {ElementMat}
         """,
@@ -606,26 +533,23 @@ class MeshMat(Mesh):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class("pyleecan.Classes", value.get("__class__"), "node")
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'node')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            NodeMat = import_class("pyleecan.Classes", "NodeMat", "node")
+            NodeMat = import_class('pyleecan.Classes', 'NodeMat', 'node')
             value = NodeMat()
         check_var("node", value, "NodeMat")
         self._node = value
 
         if self._node is not None:
             self._node.parent = self
-
     node = property(
         fget=_get_node,
         fset=_set_node,
-        doc="""Storing nodes
+        doc=u"""Storing nodes
 
         :Type: NodeMat
         """,
@@ -643,7 +567,7 @@ class MeshMat(Mesh):
     _is_renum = property(
         fget=_get__is_renum,
         fset=_set__is_renum,
-        doc="""True if renumering the nodes and elements is useful when renum method is called (saving calculation time)
+        doc=u"""True if renumering the nodes and elements is useful when renum method is called (saving calculation time)
 
         :Type: bool
         """,
@@ -661,7 +585,7 @@ class MeshMat(Mesh):
     sym = property(
         fget=_get_sym,
         fset=_set_sym,
-        doc="""Spatial symmetry factor
+        doc=u"""Spatial symmetry factor
 
         :Type: int
         """,
@@ -679,7 +603,7 @@ class MeshMat(Mesh):
     is_antiper_a = property(
         fget=_get_is_antiper_a,
         fset=_set_is_antiper_a,
-        doc="""True if there is a spatial antiperiod
+        doc=u"""True if there is a spatial antiperiod
 
         :Type: bool
         """,

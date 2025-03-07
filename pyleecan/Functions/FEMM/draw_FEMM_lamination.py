@@ -72,7 +72,6 @@ def draw_FEMM_lamination(
         if is_fast_draw:
             # Getting the periodicity of the lamination
             sym_draw, is_antiper_a = lam.comp_periodicity_geo()
-
             if is_antiper_a:
                 sym_draw *= 2
 

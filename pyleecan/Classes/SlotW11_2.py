@@ -93,9 +93,7 @@ except ImportError as error:
     plot_schematics = error
 
 try:
-    from ..Methods.Slot.SlotW11_2.plot_schematics_constant_tooth import (
-        plot_schematics_constant_tooth,
-    )
+    from ..Methods.Slot.SlotW11_2.plot_schematics_constant_tooth import plot_schematics_constant_tooth
 except ImportError as error:
     plot_schematics_constant_tooth = error
 
@@ -115,8 +113,7 @@ class SlotW11_2(Slot):
         _comp_line_dict = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use SlotW11_2 method _comp_line_dict: "
-                    + str(_comp_line_dict)
+                    "Can't use SlotW11_2 method _comp_line_dict: " + str(_comp_line_dict)
                 )
             )
         )
@@ -268,8 +265,7 @@ class SlotW11_2(Slot):
         plot_schematics = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use SlotW11_2 method plot_schematics: "
-                    + str(plot_schematics)
+                    "Can't use SlotW11_2 method plot_schematics: " + str(plot_schematics)
                 )
             )
         )
@@ -292,24 +288,7 @@ class SlotW11_2(Slot):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        W0=None,
-        H0=None,
-        H1=None,
-        H1_is_rad=False,
-        W1=None,
-        H2=None,
-        W2=None,
-        is_cstt_tooth=False,
-        W3=None,
-        R1=None,
-        Zs=36,
-        wedge_mat=None,
-        is_bore=True,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, W0=None, H0=None, H1=None, H1_is_rad=False, W1=None, H2=None, W2=None, is_cstt_tooth=False, W3=None, R1=None, Zs=36, wedge_mat=None, is_bore=True, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -416,151 +395,95 @@ class SlotW11_2(Slot):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Slot
-        diff_list.extend(
-            super(SlotW11_2, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
-        if (
-            other._W0 is not None
-            and self._W0 is not None
-            and isnan(other._W0)
-            and isnan(self._W0)
-        ):
+        diff_list.extend(super(SlotW11_2, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
+        if other._W0 is not None and self._W0 is not None and isnan(other._W0) and isnan(self._W0):
             pass
         elif other._W0 != self._W0:
             if is_add_value:
-                val_str = " (self=" + str(self._W0) + ", other=" + str(other._W0) + ")"
-                diff_list.append(name + ".W0" + val_str)
+                val_str = ' (self='+str(self._W0)+', other='+str(other._W0)+')'
+                diff_list.append(name+'.W0'+val_str)
             else:
-                diff_list.append(name + ".W0")
-        if (
-            other._H0 is not None
-            and self._H0 is not None
-            and isnan(other._H0)
-            and isnan(self._H0)
-        ):
+                diff_list.append(name+'.W0')
+        if other._H0 is not None and self._H0 is not None and isnan(other._H0) and isnan(self._H0):
             pass
         elif other._H0 != self._H0:
             if is_add_value:
-                val_str = " (self=" + str(self._H0) + ", other=" + str(other._H0) + ")"
-                diff_list.append(name + ".H0" + val_str)
+                val_str = ' (self='+str(self._H0)+', other='+str(other._H0)+')'
+                diff_list.append(name+'.H0'+val_str)
             else:
-                diff_list.append(name + ".H0")
-        if (
-            other._H1 is not None
-            and self._H1 is not None
-            and isnan(other._H1)
-            and isnan(self._H1)
-        ):
+                diff_list.append(name+'.H0')
+        if other._H1 is not None and self._H1 is not None and isnan(other._H1) and isnan(self._H1):
             pass
         elif other._H1 != self._H1:
             if is_add_value:
-                val_str = " (self=" + str(self._H1) + ", other=" + str(other._H1) + ")"
-                diff_list.append(name + ".H1" + val_str)
+                val_str = ' (self='+str(self._H1)+', other='+str(other._H1)+')'
+                diff_list.append(name+'.H1'+val_str)
             else:
-                diff_list.append(name + ".H1")
+                diff_list.append(name+'.H1')
         if other._H1_is_rad != self._H1_is_rad:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._H1_is_rad)
-                    + ", other="
-                    + str(other._H1_is_rad)
-                    + ")"
-                )
-                diff_list.append(name + ".H1_is_rad" + val_str)
+                val_str = ' (self='+str(self._H1_is_rad)+', other='+str(other._H1_is_rad)+')'
+                diff_list.append(name+'.H1_is_rad'+val_str)
             else:
-                diff_list.append(name + ".H1_is_rad")
-        if (
-            other._W1 is not None
-            and self._W1 is not None
-            and isnan(other._W1)
-            and isnan(self._W1)
-        ):
+                diff_list.append(name+'.H1_is_rad')
+        if other._W1 is not None and self._W1 is not None and isnan(other._W1) and isnan(self._W1):
             pass
         elif other._W1 != self._W1:
             if is_add_value:
-                val_str = " (self=" + str(self._W1) + ", other=" + str(other._W1) + ")"
-                diff_list.append(name + ".W1" + val_str)
+                val_str = ' (self='+str(self._W1)+', other='+str(other._W1)+')'
+                diff_list.append(name+'.W1'+val_str)
             else:
-                diff_list.append(name + ".W1")
-        if (
-            other._H2 is not None
-            and self._H2 is not None
-            and isnan(other._H2)
-            and isnan(self._H2)
-        ):
+                diff_list.append(name+'.W1')
+        if other._H2 is not None and self._H2 is not None and isnan(other._H2) and isnan(self._H2):
             pass
         elif other._H2 != self._H2:
             if is_add_value:
-                val_str = " (self=" + str(self._H2) + ", other=" + str(other._H2) + ")"
-                diff_list.append(name + ".H2" + val_str)
+                val_str = ' (self='+str(self._H2)+', other='+str(other._H2)+')'
+                diff_list.append(name+'.H2'+val_str)
             else:
-                diff_list.append(name + ".H2")
-        if (
-            other._W2 is not None
-            and self._W2 is not None
-            and isnan(other._W2)
-            and isnan(self._W2)
-        ):
+                diff_list.append(name+'.H2')
+        if other._W2 is not None and self._W2 is not None and isnan(other._W2) and isnan(self._W2):
             pass
         elif other._W2 != self._W2:
             if is_add_value:
-                val_str = " (self=" + str(self._W2) + ", other=" + str(other._W2) + ")"
-                diff_list.append(name + ".W2" + val_str)
+                val_str = ' (self='+str(self._W2)+', other='+str(other._W2)+')'
+                diff_list.append(name+'.W2'+val_str)
             else:
-                diff_list.append(name + ".W2")
+                diff_list.append(name+'.W2')
         if other._is_cstt_tooth != self._is_cstt_tooth:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._is_cstt_tooth)
-                    + ", other="
-                    + str(other._is_cstt_tooth)
-                    + ")"
-                )
-                diff_list.append(name + ".is_cstt_tooth" + val_str)
+                val_str = ' (self='+str(self._is_cstt_tooth)+', other='+str(other._is_cstt_tooth)+')'
+                diff_list.append(name+'.is_cstt_tooth'+val_str)
             else:
-                diff_list.append(name + ".is_cstt_tooth")
-        if (
-            other._W3 is not None
-            and self._W3 is not None
-            and isnan(other._W3)
-            and isnan(self._W3)
-        ):
+                diff_list.append(name+'.is_cstt_tooth')
+        if other._W3 is not None and self._W3 is not None and isnan(other._W3) and isnan(self._W3):
             pass
         elif other._W3 != self._W3:
             if is_add_value:
-                val_str = " (self=" + str(self._W3) + ", other=" + str(other._W3) + ")"
-                diff_list.append(name + ".W3" + val_str)
+                val_str = ' (self='+str(self._W3)+', other='+str(other._W3)+')'
+                diff_list.append(name+'.W3'+val_str)
             else:
-                diff_list.append(name + ".W3")
-        if (
-            other._R1 is not None
-            and self._R1 is not None
-            and isnan(other._R1)
-            and isnan(self._R1)
-        ):
+                diff_list.append(name+'.W3')
+        if other._R1 is not None and self._R1 is not None and isnan(other._R1) and isnan(self._R1):
             pass
         elif other._R1 != self._R1:
             if is_add_value:
-                val_str = " (self=" + str(self._R1) + ", other=" + str(other._R1) + ")"
-                diff_list.append(name + ".R1" + val_str)
+                val_str = ' (self='+str(self._R1)+', other='+str(other._R1)+')'
+                diff_list.append(name+'.R1'+val_str)
             else:
-                diff_list.append(name + ".R1")
+                diff_list.append(name+'.R1')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -589,16 +512,12 @@ class SlotW11_2(Slot):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Slot
-        SlotW11_2_dict = super(SlotW11_2, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        SlotW11_2_dict = super(SlotW11_2, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         SlotW11_2_dict["W0"] = self.W0
         SlotW11_2_dict["H0"] = self.H0
         SlotW11_2_dict["H1"] = self.H1
@@ -613,6 +532,7 @@ class SlotW11_2(Slot):
         # Overwrite the mother class name
         SlotW11_2_dict["__class__"] = "SlotW11_2"
         return SlotW11_2_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -635,21 +555,7 @@ class SlotW11_2(Slot):
             wedge_mat_val = self.wedge_mat.copy()
         is_bore_val = self.is_bore
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            W0=W0_val,
-            H0=H0_val,
-            H1=H1_val,
-            H1_is_rad=H1_is_rad_val,
-            W1=W1_val,
-            H2=H2_val,
-            W2=W2_val,
-            is_cstt_tooth=is_cstt_tooth_val,
-            W3=W3_val,
-            R1=R1_val,
-            Zs=Zs_val,
-            wedge_mat=wedge_mat_val,
-            is_bore=is_bore_val,
-        )
+        obj_copy = type(self)(W0=W0_val,H0=H0_val,H1=H1_val,H1_is_rad=H1_is_rad_val,W1=W1_val,H2=H2_val,W2=W2_val,is_cstt_tooth=is_cstt_tooth_val,W3=W3_val,R1=R1_val,Zs=Zs_val,wedge_mat=wedge_mat_val,is_bore=is_bore_val)
         return obj_copy
 
     def _set_None(self):
@@ -680,7 +586,7 @@ class SlotW11_2(Slot):
     W0 = property(
         fget=_get_W0,
         fset=_set_W0,
-        doc="""Slot isthmus width.
+        doc=u"""Slot isthmus width.
 
         :Type: float
         :min: 0
@@ -699,7 +605,7 @@ class SlotW11_2(Slot):
     H0 = property(
         fget=_get_H0,
         fset=_set_H0,
-        doc="""Slot isthmus height.
+        doc=u"""Slot isthmus height.
 
         :Type: float
         :min: 0
@@ -718,7 +624,7 @@ class SlotW11_2(Slot):
     H1 = property(
         fget=_get_H1,
         fset=_set_H1,
-        doc="""height or angle  (See Schematics)
+        doc=u"""height or angle  (See Schematics)
 
         :Type: float
         :min: 0
@@ -737,7 +643,7 @@ class SlotW11_2(Slot):
     H1_is_rad = property(
         fget=_get_H1_is_rad,
         fset=_set_H1_is_rad,
-        doc="""H1 unit, 0 for m, 1 for rad
+        doc=u"""H1 unit, 0 for m, 1 for rad
 
         :Type: bool
         """,
@@ -755,7 +661,7 @@ class SlotW11_2(Slot):
     W1 = property(
         fget=_get_W1,
         fset=_set_W1,
-        doc="""Slot top width.
+        doc=u"""Slot top width.
 
         :Type: float
         :min: 0
@@ -774,7 +680,7 @@ class SlotW11_2(Slot):
     H2 = property(
         fget=_get_H2,
         fset=_set_H2,
-        doc="""Slot height below wedge 
+        doc=u"""Slot height below wedge 
 
         :Type: float
         :min: 0
@@ -793,7 +699,7 @@ class SlotW11_2(Slot):
     W2 = property(
         fget=_get_W2,
         fset=_set_W2,
-        doc="""Slot bottom width.
+        doc=u"""Slot bottom width.
 
         :Type: float
         :min: 0
@@ -812,7 +718,7 @@ class SlotW11_2(Slot):
     is_cstt_tooth = property(
         fget=_get_is_cstt_tooth,
         fset=_set_is_cstt_tooth,
-        doc="""True: use W3 to define the slot, False: use W2 and W1
+        doc=u"""True: use W3 to define the slot, False: use W2 and W1
 
         :Type: bool
         """,
@@ -825,7 +731,7 @@ class SlotW11_2(Slot):
     W3 = property(
         fget=_get_W3,
         fset=_set_W3,
-        doc="""Tooth width
+        doc=u"""Tooth width
 
         :Type: float
         :min: 0
@@ -844,7 +750,7 @@ class SlotW11_2(Slot):
     R1 = property(
         fget=_get_R1,
         fset=_set_R1,
-        doc="""Slot bottom radius
+        doc=u"""Slot bottom radius
 
         :Type: float
         :min: 0

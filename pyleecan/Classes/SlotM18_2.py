@@ -201,8 +201,7 @@ class SlotM18_2(Slot):
         plot_schematics = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use SlotM18_2 method plot_schematics: "
-                    + str(plot_schematics)
+                    "Can't use SlotM18_2 method plot_schematics: " + str(plot_schematics)
                 )
             )
         )
@@ -249,16 +248,7 @@ class SlotM18_2(Slot):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        H0_bore=0.001,
-        H0_gap=0.001,
-        Zs=36,
-        wedge_mat=None,
-        is_bore=True,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, H0_bore=0.001, H0_gap=0.001, Zs=36, wedge_mat=None, is_bore=True, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -317,61 +307,35 @@ class SlotM18_2(Slot):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Slot
-        diff_list.extend(
-            super(SlotM18_2, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
-        if (
-            other._H0_bore is not None
-            and self._H0_bore is not None
-            and isnan(other._H0_bore)
-            and isnan(self._H0_bore)
-        ):
+        diff_list.extend(super(SlotM18_2, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
+        if other._H0_bore is not None and self._H0_bore is not None and isnan(other._H0_bore) and isnan(self._H0_bore):
             pass
         elif other._H0_bore != self._H0_bore:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._H0_bore)
-                    + ", other="
-                    + str(other._H0_bore)
-                    + ")"
-                )
-                diff_list.append(name + ".H0_bore" + val_str)
+                val_str = ' (self='+str(self._H0_bore)+', other='+str(other._H0_bore)+')'
+                diff_list.append(name+'.H0_bore'+val_str)
             else:
-                diff_list.append(name + ".H0_bore")
-        if (
-            other._H0_gap is not None
-            and self._H0_gap is not None
-            and isnan(other._H0_gap)
-            and isnan(self._H0_gap)
-        ):
+                diff_list.append(name+'.H0_bore')
+        if other._H0_gap is not None and self._H0_gap is not None and isnan(other._H0_gap) and isnan(self._H0_gap):
             pass
         elif other._H0_gap != self._H0_gap:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._H0_gap)
-                    + ", other="
-                    + str(other._H0_gap)
-                    + ")"
-                )
-                diff_list.append(name + ".H0_gap" + val_str)
+                val_str = ' (self='+str(self._H0_gap)+', other='+str(other._H0_gap)+')'
+                diff_list.append(name+'.H0_gap'+val_str)
             else:
-                diff_list.append(name + ".H0_gap")
+                diff_list.append(name+'.H0_gap')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -392,22 +356,19 @@ class SlotM18_2(Slot):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Slot
-        SlotM18_2_dict = super(SlotM18_2, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        SlotM18_2_dict = super(SlotM18_2, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         SlotM18_2_dict["H0_bore"] = self.H0_bore
         SlotM18_2_dict["H0_gap"] = self.H0_gap
         # The class name is added to the dict for deserialisation purpose
         # Overwrite the mother class name
         SlotM18_2_dict["__class__"] = "SlotM18_2"
         return SlotM18_2_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -422,13 +383,7 @@ class SlotM18_2(Slot):
             wedge_mat_val = self.wedge_mat.copy()
         is_bore_val = self.is_bore
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            H0_bore=H0_bore_val,
-            H0_gap=H0_gap_val,
-            Zs=Zs_val,
-            wedge_mat=wedge_mat_val,
-            is_bore=is_bore_val,
-        )
+        obj_copy = type(self)(H0_bore=H0_bore_val,H0_gap=H0_gap_val,Zs=Zs_val,wedge_mat=wedge_mat_val,is_bore=is_bore_val)
         return obj_copy
 
     def _set_None(self):
@@ -451,7 +406,7 @@ class SlotM18_2(Slot):
     H0_bore = property(
         fget=_get_H0_bore,
         fset=_set_H0_bore,
-        doc="""Height of the magnet near the bore
+        doc=u"""Height of the magnet near the bore
 
         :Type: float
         :min: 0
@@ -470,7 +425,7 @@ class SlotM18_2(Slot):
     H0_gap = property(
         fget=_get_H0_gap,
         fset=_set_H0_gap,
-        doc="""Height of the magnet near the airgap
+        doc=u"""Height of the magnet near the airgap
 
         :Type: float
         :min: 0

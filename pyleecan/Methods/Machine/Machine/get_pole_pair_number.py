@@ -25,6 +25,7 @@ def get_pole_pair_number(self):
 
     # Get pole pair number for all laminations
     for i, lam in enumerate(lam_list):
+        print("original: ",p, "Fallo: ", lam.get_pole_pair_number())
         # Check that the pole pair number of lam is the same as the previous one
         if lam.get_pole_pair_number() != p:
             raise Exception(

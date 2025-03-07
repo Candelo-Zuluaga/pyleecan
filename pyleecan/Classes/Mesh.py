@@ -49,7 +49,7 @@ class Mesh(FrozenClass):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(self, dimension=2, init_dict=None, init_str=None):
+    def __init__(self, dimension=2, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -94,28 +94,22 @@ class Mesh(FrozenClass):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
         if other._dimension != self._dimension:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._dimension)
-                    + ", other="
-                    + str(other._dimension)
-                    + ")"
-                )
-                diff_list.append(name + ".dimension" + val_str)
+                val_str = ' (self='+str(self._dimension)+', other='+str(other._dimension)+')'
+                diff_list.append(name+'.dimension'+val_str)
             else:
-                diff_list.append(name + ".dimension")
+                diff_list.append(name+'.dimension')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -132,7 +126,7 @@ class Mesh(FrozenClass):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
@@ -141,6 +135,7 @@ class Mesh(FrozenClass):
         # The class name is added to the dict for deserialisation purpose
         Mesh_dict["__class__"] = "Mesh"
         return Mesh_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -168,7 +163,7 @@ class Mesh(FrozenClass):
     dimension = property(
         fget=_get_dimension,
         fset=_set_dimension,
-        doc="""Dimension of the physical problem
+        doc=u"""Dimension of the physical problem
 
         :Type: int
         :min: 1

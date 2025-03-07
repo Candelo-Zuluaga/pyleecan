@@ -49,7 +49,7 @@ from ._check import InitUnKnowClassError
 
 
 class ElementMat(FrozenClass):
-    """Define the connectivity under matricial format containing one type of element (example: only triangles with 3 nodes)."""
+    """Define the connectivity under matricial format containing one type of element (example: only triangles with 3 nodes). """
 
     VERSION = 1
 
@@ -114,18 +114,7 @@ class ElementMat(FrozenClass):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        connectivity=None,
-        nb_element=0,
-        nb_node_per_element=0,
-        indice=None,
-        ref_element=None,
-        gauss_point=None,
-        scalar_product=-1,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, connectivity=None, nb_element=0, nb_node_per_element=0, indice=None, ref_element=None, gauss_point=None, scalar_product=-1, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -176,45 +165,23 @@ class ElementMat(FrozenClass):
             ElementMat_str += "parent = None " + linesep
         else:
             ElementMat_str += "parent = " + str(type(self.parent)) + " object" + linesep
-        ElementMat_str += (
-            "connectivity = "
-            + linesep
-            + str(self.connectivity).replace(linesep, linesep + "\t")
-            + linesep
-            + linesep
-        )
+        ElementMat_str += "connectivity = " + linesep + str(self.connectivity).replace(linesep, linesep + "\t") + linesep + linesep
         ElementMat_str += "nb_element = " + str(self.nb_element) + linesep
-        ElementMat_str += (
-            "nb_node_per_element = " + str(self.nb_node_per_element) + linesep
-        )
-        ElementMat_str += (
-            "indice = "
-            + linesep
-            + str(self.indice).replace(linesep, linesep + "\t")
-            + linesep
-            + linesep
-        )
+        ElementMat_str += "nb_node_per_element = " + str(self.nb_node_per_element) + linesep
+        ElementMat_str += "indice = " + linesep + str(self.indice).replace(linesep, linesep + "\t") + linesep + linesep
         if self.ref_element is not None:
-            tmp = (
-                self.ref_element.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            )
-            ElementMat_str += "ref_element = " + tmp
+            tmp = self.ref_element.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            ElementMat_str += "ref_element = "+ tmp
         else:
             ElementMat_str += "ref_element = None" + linesep + linesep
         if self.gauss_point is not None:
-            tmp = (
-                self.gauss_point.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            )
-            ElementMat_str += "gauss_point = " + tmp
+            tmp = self.gauss_point.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            ElementMat_str += "gauss_point = "+ tmp
         else:
             ElementMat_str += "gauss_point = None" + linesep + linesep
         if self.scalar_product is not None:
-            tmp = (
-                self.scalar_product.__str__()
-                .replace(linesep, linesep + "\t")
-                .rstrip("\t")
-            )
-            ElementMat_str += "scalar_product = " + tmp
+            tmp = self.scalar_product.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            ElementMat_str += "scalar_product = "+ tmp
         else:
             ElementMat_str += "scalar_product = None" + linesep + linesep
         return ElementMat_str
@@ -240,83 +207,44 @@ class ElementMat(FrozenClass):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
         if not array_equal(other.connectivity, self.connectivity):
-            diff_list.append(name + ".connectivity")
+            diff_list.append(name+'.connectivity')
         if other._nb_element != self._nb_element:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._nb_element)
-                    + ", other="
-                    + str(other._nb_element)
-                    + ")"
-                )
-                diff_list.append(name + ".nb_element" + val_str)
+                val_str = ' (self='+str(self._nb_element)+', other='+str(other._nb_element)+')'
+                diff_list.append(name+'.nb_element'+val_str)
             else:
-                diff_list.append(name + ".nb_element")
+                diff_list.append(name+'.nb_element')
         if other._nb_node_per_element != self._nb_node_per_element:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._nb_node_per_element)
-                    + ", other="
-                    + str(other._nb_node_per_element)
-                    + ")"
-                )
-                diff_list.append(name + ".nb_node_per_element" + val_str)
+                val_str = ' (self='+str(self._nb_node_per_element)+', other='+str(other._nb_node_per_element)+')'
+                diff_list.append(name+'.nb_node_per_element'+val_str)
             else:
-                diff_list.append(name + ".nb_node_per_element")
+                diff_list.append(name+'.nb_node_per_element')
         if not array_equal(other.indice, self.indice):
-            diff_list.append(name + ".indice")
-        if (other.ref_element is None and self.ref_element is not None) or (
-            other.ref_element is not None and self.ref_element is None
-        ):
-            diff_list.append(name + ".ref_element None mismatch")
+            diff_list.append(name+'.indice')
+        if (other.ref_element is None and self.ref_element is not None) or (other.ref_element is not None and self.ref_element is None):
+            diff_list.append(name+'.ref_element None mismatch')
         elif self.ref_element is not None:
-            diff_list.extend(
-                self.ref_element.compare(
-                    other.ref_element,
-                    name=name + ".ref_element",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
-        if (other.gauss_point is None and self.gauss_point is not None) or (
-            other.gauss_point is not None and self.gauss_point is None
-        ):
-            diff_list.append(name + ".gauss_point None mismatch")
+            diff_list.extend(self.ref_element.compare(other.ref_element,name=name+'.ref_element',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.gauss_point is None and self.gauss_point is not None) or (other.gauss_point is not None and self.gauss_point is None):
+            diff_list.append(name+'.gauss_point None mismatch')
         elif self.gauss_point is not None:
-            diff_list.extend(
-                self.gauss_point.compare(
-                    other.gauss_point,
-                    name=name + ".gauss_point",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
-        if (other.scalar_product is None and self.scalar_product is not None) or (
-            other.scalar_product is not None and self.scalar_product is None
-        ):
-            diff_list.append(name + ".scalar_product None mismatch")
+            diff_list.extend(self.gauss_point.compare(other.gauss_point,name=name+'.gauss_point',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.scalar_product is None and self.scalar_product is not None) or (other.scalar_product is not None and self.scalar_product is None):
+            diff_list.append(name+'.scalar_product None mismatch')
         elif self.scalar_product is not None:
-            diff_list.extend(
-                self.scalar_product.compare(
-                    other.scalar_product,
-                    name=name + ".scalar_product",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
+            diff_list.extend(self.scalar_product.compare(other.scalar_product,name=name+'.scalar_product',ignore_list=ignore_list,is_add_value=is_add_value))
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -339,7 +267,7 @@ class ElementMat(FrozenClass):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
@@ -347,58 +275,43 @@ class ElementMat(FrozenClass):
         if self.connectivity is None:
             ElementMat_dict["connectivity"] = None
         else:
-            if type_handle_ndarray == 0:
+            if type_handle_ndarray==0:
                 ElementMat_dict["connectivity"] = self.connectivity.tolist()
-            elif type_handle_ndarray == 1:
+            elif type_handle_ndarray==1:
                 ElementMat_dict["connectivity"] = self.connectivity.copy()
-            elif type_handle_ndarray == 2:
+            elif type_handle_ndarray==2:
                 ElementMat_dict["connectivity"] = self.connectivity
             else:
-                raise Exception(
-                    "Unknown type_handle_ndarray: " + str(type_handle_ndarray)
-                )
+                raise Exception ('Unknown type_handle_ndarray: '+str(type_handle_ndarray))
         ElementMat_dict["nb_element"] = self.nb_element
         ElementMat_dict["nb_node_per_element"] = self.nb_node_per_element
         if self.indice is None:
             ElementMat_dict["indice"] = None
         else:
-            if type_handle_ndarray == 0:
+            if type_handle_ndarray==0:
                 ElementMat_dict["indice"] = self.indice.tolist()
-            elif type_handle_ndarray == 1:
+            elif type_handle_ndarray==1:
                 ElementMat_dict["indice"] = self.indice.copy()
-            elif type_handle_ndarray == 2:
+            elif type_handle_ndarray==2:
                 ElementMat_dict["indice"] = self.indice
             else:
-                raise Exception(
-                    "Unknown type_handle_ndarray: " + str(type_handle_ndarray)
-                )
+                raise Exception ('Unknown type_handle_ndarray: '+str(type_handle_ndarray))
         if self.ref_element is None:
             ElementMat_dict["ref_element"] = None
         else:
-            ElementMat_dict["ref_element"] = self.ref_element.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            ElementMat_dict["ref_element"] = self.ref_element.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.gauss_point is None:
             ElementMat_dict["gauss_point"] = None
         else:
-            ElementMat_dict["gauss_point"] = self.gauss_point.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            ElementMat_dict["gauss_point"] = self.gauss_point.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.scalar_product is None:
             ElementMat_dict["scalar_product"] = None
         else:
-            ElementMat_dict["scalar_product"] = self.scalar_product.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            ElementMat_dict["scalar_product"] = self.scalar_product.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         # The class name is added to the dict for deserialisation purpose
         ElementMat_dict["__class__"] = "ElementMat"
         return ElementMat_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -427,15 +340,7 @@ class ElementMat(FrozenClass):
         else:
             scalar_product_val = self.scalar_product.copy()
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            connectivity=connectivity_val,
-            nb_element=nb_element_val,
-            nb_node_per_element=nb_node_per_element_val,
-            indice=indice_val,
-            ref_element=ref_element_val,
-            gauss_point=gauss_point_val,
-            scalar_product=scalar_product_val,
-        )
+        obj_copy = type(self)(connectivity=connectivity_val,nb_element=nb_element_val,nb_node_per_element=nb_node_per_element_val,indice=indice_val,ref_element=ref_element_val,gauss_point=gauss_point_val,scalar_product=scalar_product_val)
         return obj_copy
 
     def _set_None(self):
@@ -471,7 +376,7 @@ class ElementMat(FrozenClass):
     connectivity = property(
         fget=_get_connectivity,
         fset=_set_connectivity,
-        doc="""Matrix of connectivity for one element type
+        doc=u"""Matrix of connectivity for one element type
 
         :Type: ndarray
         """,
@@ -489,7 +394,7 @@ class ElementMat(FrozenClass):
     nb_element = property(
         fget=_get_nb_element,
         fset=_set_nb_element,
-        doc="""Total number of elements
+        doc=u"""Total number of elements
 
         :Type: int
         """,
@@ -507,7 +412,7 @@ class ElementMat(FrozenClass):
     nb_node_per_element = property(
         fget=_get_nb_node_per_element,
         fset=_set_nb_node_per_element,
-        doc="""Define the number of node per element
+        doc=u"""Define the number of node per element
 
         :Type: int
         """,
@@ -532,7 +437,7 @@ class ElementMat(FrozenClass):
     indice = property(
         fget=_get_indice,
         fset=_set_indice,
-        doc="""Element indices
+        doc=u"""Element indices
 
         :Type: ndarray
         """,
@@ -548,28 +453,23 @@ class ElementMat(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "ref_element"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'ref_element')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            RefElement = import_class("pyleecan.Classes", "RefElement", "ref_element")
+            RefElement = import_class('pyleecan.Classes', 'RefElement', 'ref_element')
             value = RefElement()
         check_var("ref_element", value, "RefElement")
         self._ref_element = value
 
         if self._ref_element is not None:
             self._ref_element.parent = self
-
     ref_element = property(
         fget=_get_ref_element,
         fset=_set_ref_element,
-        doc="""
+        doc=u"""
 
         :Type: RefElement
         """,
@@ -585,28 +485,23 @@ class ElementMat(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "gauss_point"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'gauss_point')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            GaussPoint = import_class("pyleecan.Classes", "GaussPoint", "gauss_point")
+            GaussPoint = import_class('pyleecan.Classes', 'GaussPoint', 'gauss_point')
             value = GaussPoint()
         check_var("gauss_point", value, "GaussPoint")
         self._gauss_point = value
 
         if self._gauss_point is not None:
             self._gauss_point.parent = self
-
     gauss_point = property(
         fget=_get_gauss_point,
         fset=_set_gauss_point,
-        doc="""
+        doc=u"""
 
         :Type: GaussPoint
         """,
@@ -622,30 +517,23 @@ class ElementMat(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "scalar_product"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'scalar_product')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            ScalarProductL2 = import_class(
-                "pyleecan.Classes", "ScalarProductL2", "scalar_product"
-            )
+            ScalarProductL2 = import_class('pyleecan.Classes', 'ScalarProductL2', 'scalar_product')
             value = ScalarProductL2()
         check_var("scalar_product", value, "ScalarProductL2")
         self._scalar_product = value
 
         if self._scalar_product is not None:
             self._scalar_product.parent = self
-
     scalar_product = property(
         fget=_get_scalar_product,
         fset=_set_scalar_product,
-        doc="""
+        doc=u"""
 
         :Type: ScalarProductL2
         """,

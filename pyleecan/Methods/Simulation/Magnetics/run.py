@@ -15,7 +15,7 @@ def run(self):
     self.get_logger().debug("Using " + self.__class__.__name__ + " object")
 
     output = self.parent.parent
-
+    
     # Get slice model and store it in output
     slice_model = self.get_slice_model()
     output.mag.Slice = slice_model
@@ -38,7 +38,7 @@ def run(self):
     # Assign stator and rotor angle shifts
     self.angle_stator_shift = float(slice_model.angle_stator[unique_indices[0]])
     self.angle_rotor_shift = float(slice_model.angle_rotor[unique_indices[0]])
-
+    
     # Calculate airgap flux
     Nslices = len(unique_indices)
     if Nslices > 1:

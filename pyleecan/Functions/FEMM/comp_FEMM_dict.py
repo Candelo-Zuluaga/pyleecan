@@ -1,5 +1,6 @@
 from ...Classes.LamH import LamH
 from ...Classes.LamSlotM import LamSlotM
+from ...Classes.LamSlotMultiMagWind import LamSlotMultiMagWind
 from ...Classes.MachineSIPMSM import MachineSIPMSM
 
 from ...Functions.FEMM import FEMM_GROUPS
@@ -137,6 +138,14 @@ def comp_FEMM_dict(
             Hmag = lam.get_hole_list()[0].comp_height()
             FEMM_dict["mesh"][label]["meshsize_magnet"] = Hmag / 4 / Kmesh_fineness
             FEMM_dict["mesh"][label]["elementsize_magnet"] = Hmag / 4 / Kmesh_fineness
+        elif isinstance(lam, LamSlotMultiMagWind):
+            for ii in range(0,len(lam.slot_list)):
+                if lam.type_list[ii]=='M':
+                    Hmag = (
+                        lam.slot_list[ii].comp_height_active()
+                    )  # For LamSlotMagNS => slot is North slot
+            FEMM_dict["mesh"][label]["meshsize_magnet"] = Hmag / 4 / Kmesh_fineness
+            FEMM_dict["mesh"][label]["elementsize_magnet"] = Hmag / 4 / Kmesh_fineness
         else:
             FEMM_dict["mesh"][label]["meshsize_magnet"] = None
 
@@ -165,7 +174,7 @@ def comp_FEMM_dict(
     for key, val in FEMM_GROUPS["lam_group_list"].items():
         FEMM_dict["groups"]["lam_group_list"][key] = list(val)
 
-    # Adding a group for each magnet on the lamination
+    # Adding a group for each magnet on the lamination (Rotor)
     if isinstance(machine.rotor, (LamSlotM, LamH)):
         nb_mag = machine.rotor.get_magnet_number(sym=sym)
         ndigit = max(len(str(nb_mag)), len(str(grp_max)) - 1)
@@ -173,6 +182,17 @@ def comp_FEMM_dict(
         list_mag = [grp0 + ii for ii in range(nb_mag)]
         FEMM_dict["groups"]["GROUP_RM"] = list_mag
         FEMM_dict["groups"]["lam_group_list"][machine.rotor.get_label()].extend(
+            list_mag
+        )
+    
+    # Adding a group for each magnet on the lamination (Stator)
+    if isinstance(machine.stator, LamSlotMultiMagWind):
+        nb_mag = machine.stator.get_magnet_number(sym=sym)
+        ndigit = max(len(str(nb_mag)), len(str(grp_max)) - 1)
+        grp0 = FEMM_dict["groups"]["GROUP_SM"] * 10**ndigit
+        list_mag = [grp0 + ii for ii in range(nb_mag)]
+        FEMM_dict["groups"]["GROUP_SM"] = list_mag
+        FEMM_dict["groups"]["lam_group_list"][machine.stator.get_label()].extend(
             list_mag
         )
 

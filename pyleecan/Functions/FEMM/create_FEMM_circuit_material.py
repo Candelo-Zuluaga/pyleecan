@@ -2,6 +2,7 @@
 
 from numpy import pi, sign, sqrt
 
+from ...Classes.LamSlotMultiMagWind import LamSlotMultiMagWind
 from ...Functions.FEMM.set_FEMM_circuit_prop import set_FEMM_circuit_prop
 from ...Functions.FEMM.set_FEMM_wind_material import set_FEMM_wind_material
 from ...Functions.Winding.find_wind_phase_color import get_phase_id
@@ -46,7 +47,10 @@ def create_FEMM_circuit_material(
 
     # Load parameter for readibility
     rho = lam.winding.conductor.cond_mat.elec.get_resistivity()  # Resistivity at 20°C
-    wind_mat = lam.winding.get_connection_mat(lam.get_Zs())
+    if isinstance(lam,LamSlotMultiMagWind):
+        wind_mat = lam.winding.get_connection_mat(lam.get_Zs('W'))
+    else:
+        wind_mat = lam.winding.get_connection_mat(lam.get_Zs())
     Swire = lam.winding.conductor.comp_surface_active()
 
     # Decode the label

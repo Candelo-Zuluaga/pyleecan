@@ -82,15 +82,7 @@ class RuleComplex(Rule):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        fct_name=None,
-        folder=None,
-        param_dict=-1,
-        unit_type="m",
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, fct_name=None, folder=None, param_dict=-1, unit_type="m", init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -151,59 +143,37 @@ class RuleComplex(Rule):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Rule
-        diff_list.extend(
-            super(RuleComplex, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
+        diff_list.extend(super(RuleComplex, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
         if other._fct_name != self._fct_name:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._fct_name)
-                    + ", other="
-                    + str(other._fct_name)
-                    + ")"
-                )
-                diff_list.append(name + ".fct_name" + val_str)
+                val_str = ' (self='+str(self._fct_name)+', other='+str(other._fct_name)+')'
+                diff_list.append(name+'.fct_name'+val_str)
             else:
-                diff_list.append(name + ".fct_name")
+                diff_list.append(name+'.fct_name')
         if other._folder != self._folder:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._folder)
-                    + ", other="
-                    + str(other._folder)
-                    + ")"
-                )
-                diff_list.append(name + ".folder" + val_str)
+                val_str = ' (self='+str(self._folder)+', other='+str(other._folder)+')'
+                diff_list.append(name+'.folder'+val_str)
             else:
-                diff_list.append(name + ".folder")
+                diff_list.append(name+'.folder')
         if other._param_dict != self._param_dict:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._param_dict)
-                    + ", other="
-                    + str(other._param_dict)
-                    + ")"
-                )
-                diff_list.append(name + ".param_dict" + val_str)
+                val_str = ' (self='+str(self._param_dict)+', other='+str(other._param_dict)+')'
+                diff_list.append(name+'.param_dict'+val_str)
             else:
-                diff_list.append(name + ".param_dict")
+                diff_list.append(name+'.param_dict')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -227,16 +197,12 @@ class RuleComplex(Rule):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Rule
-        RuleComplex_dict = super(RuleComplex, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        RuleComplex_dict = super(RuleComplex, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         RuleComplex_dict["fct_name"] = self.fct_name
         RuleComplex_dict["folder"] = self.folder
         RuleComplex_dict["param_dict"] = (
@@ -246,6 +212,7 @@ class RuleComplex(Rule):
         # Overwrite the mother class name
         RuleComplex_dict["__class__"] = "RuleComplex"
         return RuleComplex_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -259,12 +226,7 @@ class RuleComplex(Rule):
             param_dict_val = self.param_dict.copy()
         unit_type_val = self.unit_type
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            fct_name=fct_name_val,
-            folder=folder_val,
-            param_dict=param_dict_val,
-            unit_type=unit_type_val,
-        )
+        obj_copy = type(self)(fct_name=fct_name_val,folder=folder_val,param_dict=param_dict_val,unit_type=unit_type_val)
         return obj_copy
 
     def _set_None(self):
@@ -283,7 +245,7 @@ class RuleComplex(Rule):
     fct_name = property(
         fget=_get_fct_name,
         fset=_set_fct_name,
-        doc="""fonction name to convert
+        doc=u"""fonction name to convert
 
         :Type: str
         """,
@@ -301,7 +263,7 @@ class RuleComplex(Rule):
     folder = property(
         fget=_get_folder,
         fset=_set_folder,
-        doc="""name source
+        doc=u"""name source
 
         :Type: str
         """,
@@ -321,7 +283,7 @@ class RuleComplex(Rule):
     param_dict = property(
         fget=_get_param_dict,
         fset=_set_param_dict,
-        doc="""dict to pass param 
+        doc=u"""dict to pass param 
 
         :Type: dict
         """,

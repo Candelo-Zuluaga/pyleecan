@@ -83,15 +83,7 @@ class RuleEquation(Rule):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        param=None,
-        equation=None,
-        file_name=None,
-        unit_type="m",
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, param=None, equation=None, file_name=None, unit_type="m", init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -130,12 +122,7 @@ class RuleEquation(Rule):
         RuleEquation_str = ""
         # Get the properties inherited from Rule
         RuleEquation_str += super(RuleEquation, self).__str__()
-        RuleEquation_str += (
-            "param = "
-            + linesep
-            + str(self.param).replace(linesep, linesep + "\t")
-            + linesep
-        )
+        RuleEquation_str += "param = " + linesep + str(self.param).replace(linesep, linesep + "\t") + linesep
         RuleEquation_str += 'equation = "' + str(self.equation) + '"' + linesep
         RuleEquation_str += 'file_name = "' + str(self.file_name) + '"' + linesep
         return RuleEquation_str
@@ -157,55 +144,37 @@ class RuleEquation(Rule):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Rule
-        diff_list.extend(
-            super(RuleEquation, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
+        diff_list.extend(super(RuleEquation, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
         if other._param != self._param:
             if is_add_value:
-                val_str = (
-                    " (self=" + str(self._param) + ", other=" + str(other._param) + ")"
-                )
-                diff_list.append(name + ".param" + val_str)
+                val_str = ' (self='+str(self._param)+', other='+str(other._param)+')'
+                diff_list.append(name+'.param'+val_str)
             else:
-                diff_list.append(name + ".param")
+                diff_list.append(name+'.param')
         if other._equation != self._equation:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._equation)
-                    + ", other="
-                    + str(other._equation)
-                    + ")"
-                )
-                diff_list.append(name + ".equation" + val_str)
+                val_str = ' (self='+str(self._equation)+', other='+str(other._equation)+')'
+                diff_list.append(name+'.equation'+val_str)
             else:
-                diff_list.append(name + ".equation")
+                diff_list.append(name+'.equation')
         if other._file_name != self._file_name:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._file_name)
-                    + ", other="
-                    + str(other._file_name)
-                    + ")"
-                )
-                diff_list.append(name + ".file_name" + val_str)
+                val_str = ' (self='+str(self._file_name)+', other='+str(other._file_name)+')'
+                diff_list.append(name+'.file_name'+val_str)
             else:
-                diff_list.append(name + ".file_name")
+                diff_list.append(name+'.file_name')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -229,16 +198,12 @@ class RuleEquation(Rule):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Rule
-        RuleEquation_dict = super(RuleEquation, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        RuleEquation_dict = super(RuleEquation, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         RuleEquation_dict["param"] = (
             self.param.copy() if self.param is not None else None
         )
@@ -248,6 +213,7 @@ class RuleEquation(Rule):
         # Overwrite the mother class name
         RuleEquation_dict["__class__"] = "RuleEquation"
         return RuleEquation_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -261,12 +227,7 @@ class RuleEquation(Rule):
         file_name_val = self.file_name
         unit_type_val = self.unit_type
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            param=param_val,
-            equation=equation_val,
-            file_name=file_name_val,
-            unit_type=unit_type_val,
-        )
+        obj_copy = type(self)(param=param_val,equation=equation_val,file_name=file_name_val,unit_type=unit_type_val)
         return obj_copy
 
     def _set_None(self):
@@ -292,7 +253,7 @@ class RuleEquation(Rule):
     param = property(
         fget=_get_param,
         fset=_set_param,
-        doc="""dict all parameters
+        doc=u"""dict all parameters
 
         :Type: list
         """,
@@ -310,7 +271,7 @@ class RuleEquation(Rule):
     equation = property(
         fget=_get_equation,
         fset=_set_equation,
-        doc="""conversion paramter to pyleecan (Y are always on other side
+        doc=u"""conversion paramter to pyleecan (Y are always on other side
 
         :Type: str
         """,
@@ -328,7 +289,7 @@ class RuleEquation(Rule):
     file_name = property(
         fget=_get_file_name,
         fset=_set_file_name,
-        doc="""use just to debug, give name of file
+        doc=u"""use just to debug, give name of file
 
         :Type: str
         """,

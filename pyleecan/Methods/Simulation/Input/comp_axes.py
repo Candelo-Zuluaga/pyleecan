@@ -74,7 +74,7 @@ def comp_axes(
 
     # Get machine pole pair number
     p = machine.get_pole_pair_number()
-
+    
     # Fill periodicity parameters that are None
     if (is_periodicity_a is not False or is_periodicity_t is not False) and (
         per_a is None or is_antiper_a is None or per_t is None or is_antiper_t is None
@@ -154,7 +154,6 @@ def comp_axes(
 
         # Calculate angle axis
         Angle = self.comp_axis_angle(p, Rag, per_a, is_antiper_a, Angle_in)
-
         # Store angle axis in dict
         axes_dict["angle"] = Angle
 
@@ -165,7 +164,7 @@ def comp_axes(
             Phase_in = axes_dict_in[stator_label]
         else:
             Phase_in = None
-
+            
         # Calculate stator phase axis
         Phase = self.comp_axis_phase(machine.stator, Phase_in)
 
@@ -187,5 +186,4 @@ def comp_axes(
         if Phase is not None:
             # Store phase axis in dict
             axes_dict[rotor_label] = Phase
-
     return axes_dict

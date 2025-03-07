@@ -365,17 +365,7 @@ class MeshSolution(FrozenClass):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        label="",
-        mesh=-1,
-        solution_dict=-1,
-        group=None,
-        dimension=2,
-        path=None,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, label="", mesh=-1, solution_dict=-1, group=None, dimension=2, path=None, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -422,23 +412,18 @@ class MeshSolution(FrozenClass):
         if self.parent is None:
             MeshSolution_str += "parent = None " + linesep
         else:
-            MeshSolution_str += (
-                "parent = " + str(type(self.parent)) + " object" + linesep
-            )
+            MeshSolution_str += "parent = " + str(type(self.parent)) + " object" + linesep
         MeshSolution_str += 'label = "' + str(self.label) + '"' + linesep
         if self.mesh is not None:
             tmp = self.mesh.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            MeshSolution_str += "mesh = " + tmp
+            MeshSolution_str += "mesh = "+ tmp
         else:
             MeshSolution_str += "mesh = None" + linesep + linesep
         if len(self.solution_dict) == 0:
-            MeshSolution_str += "solution_dict = dict()" + linesep
+            MeshSolution_str += "solution_dict = dict()"+linesep
         for key, obj in self.solution_dict.items():
-            tmp = (
-                self.solution_dict[key].__str__().replace(linesep, linesep + "\t")
-                + linesep
-            )
-            MeshSolution_str += "solution_dict[" + key + "] =" + tmp + linesep + linesep
+            tmp = self.solution_dict[key].__str__().replace(linesep, linesep + "\t") + linesep 
+            MeshSolution_str += "solution_dict["+key+"] ="+ tmp + linesep + linesep
         MeshSolution_str += "group = " + str(self.group) + linesep
         MeshSolution_str += "dimension = " + str(self.dimension) + linesep
         MeshSolution_str += 'path = "' + str(self.path) + '"' + linesep
@@ -463,83 +448,53 @@ class MeshSolution(FrozenClass):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
         if other._label != self._label:
             if is_add_value:
-                val_str = (
-                    " (self=" + str(self._label) + ", other=" + str(other._label) + ")"
-                )
-                diff_list.append(name + ".label" + val_str)
+                val_str = ' (self='+str(self._label)+', other='+str(other._label)+')'
+                diff_list.append(name+'.label'+val_str)
             else:
-                diff_list.append(name + ".label")
-        if (other.mesh is None and self.mesh is not None) or (
-            other.mesh is not None and self.mesh is None
-        ):
-            diff_list.append(name + ".mesh None mismatch")
+                diff_list.append(name+'.label')
+        if (other.mesh is None and self.mesh is not None) or (other.mesh is not None and self.mesh is None):
+            diff_list.append(name+'.mesh None mismatch')
         elif self.mesh is not None:
-            diff_list.extend(
-                self.mesh.compare(
-                    other.mesh,
-                    name=name + ".mesh",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
-        if (other.solution_dict is None and self.solution_dict is not None) or (
-            other.solution_dict is not None and self.solution_dict is None
-        ):
-            diff_list.append(name + ".solution_dict None mismatch")
+            diff_list.extend(self.mesh.compare(other.mesh,name=name+'.mesh',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.solution_dict is None and self.solution_dict is not None) or (other.solution_dict is not None and self.solution_dict is None):
+            diff_list.append(name+'.solution_dict None mismatch')
         elif self.solution_dict is None:
             pass
         elif len(other.solution_dict) != len(self.solution_dict):
-            diff_list.append("len(" + name + "solution_dict)")
+            diff_list.append('len('+name+'solution_dict)')
         else:
             for key in self.solution_dict:
-                diff_list.extend(
-                    self.solution_dict[key].compare(
-                        other.solution_dict[key],
-                        name=name + ".solution_dict[" + str(key) + "]",
-                        ignore_list=ignore_list,
-                        is_add_value=is_add_value,
-                    )
-                )
+                diff_list.extend(self.solution_dict[key].compare(other.solution_dict[key],name=name+'.solution_dict['+str(key)+']',ignore_list=ignore_list,is_add_value=is_add_value))
         if other._group != self._group:
             if is_add_value:
-                val_str = (
-                    " (self=" + str(self._group) + ", other=" + str(other._group) + ")"
-                )
-                diff_list.append(name + ".group" + val_str)
+                val_str = ' (self='+str(self._group)+', other='+str(other._group)+')'
+                diff_list.append(name+'.group'+val_str)
             else:
-                diff_list.append(name + ".group")
+                diff_list.append(name+'.group')
         if other._dimension != self._dimension:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._dimension)
-                    + ", other="
-                    + str(other._dimension)
-                    + ")"
-                )
-                diff_list.append(name + ".dimension" + val_str)
+                val_str = ' (self='+str(self._dimension)+', other='+str(other._dimension)+')'
+                diff_list.append(name+'.dimension'+val_str)
             else:
-                diff_list.append(name + ".dimension")
+                diff_list.append(name+'.dimension')
         if other._path != self._path:
             if is_add_value:
-                val_str = (
-                    " (self=" + str(self._path) + ", other=" + str(other._path) + ")"
-                )
-                diff_list.append(name + ".path" + val_str)
+                val_str = ' (self='+str(self._path)+', other='+str(other._path)+')'
+                diff_list.append(name+'.path'+val_str)
             else:
-                diff_list.append(name + ".path")
+                diff_list.append(name+'.path')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -565,7 +520,7 @@ class MeshSolution(FrozenClass):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
@@ -574,22 +529,14 @@ class MeshSolution(FrozenClass):
         if self.mesh is None:
             MeshSolution_dict["mesh"] = None
         else:
-            MeshSolution_dict["mesh"] = self.mesh.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            MeshSolution_dict["mesh"] = self.mesh.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.solution_dict is None:
             MeshSolution_dict["solution_dict"] = None
         else:
             MeshSolution_dict["solution_dict"] = dict()
             for key, obj in self.solution_dict.items():
                 if obj is not None:
-                    MeshSolution_dict["solution_dict"][key] = obj.as_dict(
-                        type_handle_ndarray=type_handle_ndarray,
-                        keep_function=keep_function,
-                        **kwargs
-                    )
+                    MeshSolution_dict["solution_dict"][key] = obj.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
                 else:
                     MeshSolution_dict["solution_dict"][key] = None
         MeshSolution_dict["group"] = (
@@ -600,6 +547,7 @@ class MeshSolution(FrozenClass):
         # The class name is added to the dict for deserialisation purpose
         MeshSolution_dict["__class__"] = "MeshSolution"
         return MeshSolution_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -623,14 +571,7 @@ class MeshSolution(FrozenClass):
         dimension_val = self.dimension
         path_val = self.path
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            label=label_val,
-            mesh=mesh_val,
-            solution_dict=solution_dict_val,
-            group=group_val,
-            dimension=dimension_val,
-            path=path_val,
-        )
+        obj_copy = type(self)(label=label_val,mesh=mesh_val,solution_dict=solution_dict_val,group=group_val,dimension=dimension_val,path=path_val)
         return obj_copy
 
     def _set_None(self):
@@ -656,7 +597,7 @@ class MeshSolution(FrozenClass):
     label = property(
         fget=_get_label,
         fset=_set_label,
-        doc="""(Optional) Descriptive name of the mesh
+        doc=u"""(Optional) Descriptive name of the mesh
 
         :Type: str
         """,
@@ -672,26 +613,23 @@ class MeshSolution(FrozenClass):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class("pyleecan.Classes", value.get("__class__"), "mesh")
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'mesh')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Mesh = import_class("pyleecan.Classes", "Mesh", "mesh")
+            Mesh = import_class('pyleecan.Classes', 'Mesh', 'mesh')
             value = Mesh()
         check_var("mesh", value, "Mesh")
         self._mesh = value
 
         if self._mesh is not None:
             self._mesh.parent = self
-
     mesh = property(
         fget=_get_mesh,
         fset=_set_mesh,
-        doc="""A Mesh object. 
+        doc=u"""A Mesh object. 
 
         :Type: Mesh
         """,
@@ -713,15 +651,11 @@ class MeshSolution(FrozenClass):
                     try:
                         obj = load_init_dict(obj)[1]
                     except Exception as e:
-                        self.get_logger().error(
-                            "Error while loading " + obj + ", setting None instead"
-                        )
+                        self.get_logger().error('Error while loading '+obj+', setting None instead')
                         obj = None
                         value[key] = None
                 if type(obj) is dict:
-                    class_obj = import_class(
-                        "pyleecan.Classes", obj.get("__class__"), "solution_dict"
-                    )
+                    class_obj = import_class('pyleecan.Classes', obj.get('__class__'), 'solution_dict')
                     value[key] = class_obj(init_dict=obj)
         if type(value) is int and value == -1:
             value = dict()
@@ -731,7 +665,7 @@ class MeshSolution(FrozenClass):
     solution_dict = property(
         fget=_get_solution_dict,
         fset=_set_solution_dict,
-        doc="""A dictionary of Solution objects
+        doc=u"""A dictionary of Solution objects
 
         :Type: {Solution}
         """,
@@ -751,7 +685,7 @@ class MeshSolution(FrozenClass):
     group = property(
         fget=_get_group,
         fset=_set_group,
-        doc="""Dict sorted by groups name with list of elements indices. 
+        doc=u"""Dict sorted by groups name with list of elements indices. 
 
         :Type: dict
         """,
@@ -769,7 +703,7 @@ class MeshSolution(FrozenClass):
     dimension = property(
         fget=_get_dimension,
         fset=_set_dimension,
-        doc="""Dimension of the physical problem
+        doc=u"""Dimension of the physical problem
 
         :Type: int
         :min: 1
@@ -789,7 +723,7 @@ class MeshSolution(FrozenClass):
     path = property(
         fget=_get_path,
         fset=_set_path,
-        doc="""Path where the MeshSolution is stored as a file
+        doc=u"""Path where the MeshSolution is stored as a file
 
         :Type: str
         """,

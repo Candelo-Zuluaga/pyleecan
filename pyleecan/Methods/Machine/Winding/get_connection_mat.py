@@ -26,7 +26,6 @@ def get_connection_mat(self, Zs=None, p=None):
 
 
     """
-
     if self.wind_mat is None:
         self.wind_mat = self.comp_connection_mat(Zs=Zs, p=p)
     elif Zs is not None and self.wind_mat.shape[2] != Zs:

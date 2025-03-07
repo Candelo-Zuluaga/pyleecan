@@ -28,19 +28,24 @@ def comp_connection_mat(self, Zs=None, p=None):
         Zs/qs/2 must be an integer
 
     """
-
     if Zs is None:
         if not hasattr(self.parent, "slot") and not hasattr(self.parent, "slot_list"):
             raise WindingError("The Winding object must be in a Lamination object.")
-
-        Zs = self.parent.get_Zs()
+        
+        if hasattr(self.parent, "slot_list"):
+            for ii in range(0,len(self.parent.slot_list)):
+                if self.parent.type_list[ii]=='W':
+                    Zs = self.parent.slot_list[ii].Zs
+                    
+        else:
+            Zs = self.parent.get_Zs()
 
     if p is None:
         if self.parent is None:
             raise WindingError("The Winding object must be in a Lamination object.")
 
         p = self.parent.get_pole_pair_number()
-
+        
     assert Zs > 0, "Zs must be >0"
     assert Zs % 1 == 0, "Zs must be an integer"
 

@@ -1,4 +1,5 @@
 from numpy import angle, pi, floor_divide
+from ...Classes.LamSlotMultiMagWind import LamSlotMultiMagWind
 from ...Classes.LamHole import LamHole
 from ...Classes.LamHoleNS import LamHoleNS
 from ...Functions.FEMM.get_mesh_param import get_mesh_param
@@ -59,7 +60,8 @@ def assign_FEMM_surface(femm, surf, prop, FEMM_dict, machine):
         if WIND_LAB in label_dict["surf_type"] or BAR_LAB in label_dict["surf_type"]:
             # If the surface is a winding or a bar => Set circuit
             lam_obj = get_obj_from_label(machine, label_dict=label_dict)
-            wind_mat = lam_obj.winding.get_connection_mat(lam_obj.get_Zs())
+            wind_mat = lam_obj.winding.get_connection_mat()
+            #wind_mat = lam_obj.winding.get_connection_mat(lam_obj.get_Zs())
             Nrad_id = label_dict["R_id"]  # zone radial coordinate
             Ntan_id = label_dict["T_id"]  # zone tangential coordinate
             Zs_id = label_dict["S_id"]  # Zone slot number coordinate
@@ -131,15 +133,20 @@ def assign_FEMM_surface(femm, surf, prop, FEMM_dict, machine):
                 mag = angle(point_ref) * 180 / pi + 180  # Parallel South pole magnet
             elif mag_obj.type_magnetization == 2:
                 lam_obj = mag_obj.parent
-                Zs = lam_obj.get_Zs()
-                mag = str(-(Zs / 2 - 1)) + " * theta + 90 "
+                if isinstance(lam_obj,LamSlotMultiMagWind):
+                    Zs = lam_obj.get_Zs('M')
+                    mag = angle(point_ref) * 180 / pi#str(-(Zs / 2 - 1)) + " * theta"
+                else:
+                    Zs = lam_obj.get_Zs()
+                    mag = str(-(Zs / 2 - 1)) + " * theta + 90 "
+                
             elif mag_obj.type_magnetization == 3 and (label_dict["S_id"] % 2) == 0:
                 mag = angle(point_ref) * 180 / pi - 90  # Tangential North pole magnet
             elif mag_obj.type_magnetization == 3:
                 mag = (
                     angle(point_ref) * 180 / pi + 180 - 90
                 )  # Tangential South pole magnet
-
+            
             # Assign magnet group (assuming one magnet per pole)
             group = group[label_dict["S_id"]]
 

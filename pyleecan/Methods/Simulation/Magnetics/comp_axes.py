@@ -14,7 +14,7 @@ def comp_axes(self, output):
         Dict containing Time and Angle axes including (anti-)periodicties used in any Magnetics module
 
     """
-
+    
     # Get geometry output
     outgeo = output.geo
 
@@ -29,7 +29,6 @@ def comp_axes(self, output):
         is_periodicity_t=self.is_periodicity_t,
         is_periodicity_rotor=self.is_periodicity_rotor,
     )
-
     # Check Time periodicities regarding Magnetics model input
     per_t0, is_antiper_t0 = axes_dict["time"].get_periodicity()
     is_periodicity_t0 = per_t0 > 1 or is_antiper_t0
@@ -45,7 +44,7 @@ def comp_axes(self, output):
                 + str(outgeo.per_t_S)
                 + "). Time periodicity removed"
             )
-
+    
     # Check Angle periodicities regarding Magnetics model input
     per_a0, is_antiper_a0 = axes_dict["angle"].get_periodicity()
     is_periodicity_a0 = per_a0 > 1 or is_antiper_a0
@@ -61,7 +60,6 @@ def comp_axes(self, output):
                 + str(outgeo.per_a)
                 + "). Angular periodicity removed"
             )
-
     # Compute slice axis
     Slice = self.Slice_enforced.get_data()
 

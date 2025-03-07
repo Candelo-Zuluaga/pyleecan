@@ -38,9 +38,7 @@ except ImportError as error:
     comp_periodicity_geo = error
 
 try:
-    from ..Methods.Machine.LamSlotMagNS.comp_periodicity_spatial import (
-        comp_periodicity_spatial,
-    )
+    from ..Methods.Machine.LamSlotMagNS.comp_periodicity_spatial import comp_periodicity_spatial
 except ImportError as error:
     comp_periodicity_spatial = error
 
@@ -214,31 +212,7 @@ class LamSlotMagNS(LamSlotM):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        magnet_north=-1,
-        magnet_south=-1,
-        slot_south=-1,
-        mur_lin_matrix=None,
-        Brm20_matrix=None,
-        slot=-1,
-        L1=0.35,
-        mat_type=-1,
-        Nrvd=0,
-        Wrvd=0,
-        Kf1=0.95,
-        is_internal=True,
-        Rint=0,
-        Rext=1,
-        is_stator=True,
-        axial_vent=-1,
-        notch=-1,
-        skew=None,
-        bore=None,
-        yoke=None,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, magnet_north=-1, magnet_south=-1, slot_south=-1, mur_lin_matrix=None, Brm20_matrix=None, slot=-1, L1=0.35, mat_type=-1, Nrvd=0, Wrvd=0, Kf1=0.95, is_internal=True, Rint=0, Rext=1, is_stator=True, axial_vent=-1, notch=-1, skew=None, bore=None, yoke=None, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -299,25 +273,7 @@ class LamSlotMagNS(LamSlotM):
         self.magnet_south = magnet_south
         self.slot_south = slot_south
         # Call LamSlotM init
-        super(LamSlotMagNS, self).__init__(
-            mur_lin_matrix=mur_lin_matrix,
-            Brm20_matrix=Brm20_matrix,
-            slot=slot,
-            L1=L1,
-            mat_type=mat_type,
-            Nrvd=Nrvd,
-            Wrvd=Wrvd,
-            Kf1=Kf1,
-            is_internal=is_internal,
-            Rint=Rint,
-            Rext=Rext,
-            is_stator=is_stator,
-            axial_vent=axial_vent,
-            notch=notch,
-            skew=skew,
-            bore=bore,
-            yoke=yoke,
-        )
+        super(LamSlotMagNS, self).__init__(mur_lin_matrix=mur_lin_matrix, Brm20_matrix=Brm20_matrix, slot=slot, L1=L1, mat_type=mat_type, Nrvd=Nrvd, Wrvd=Wrvd, Kf1=Kf1, is_internal=is_internal, Rint=Rint, Rext=Rext, is_stator=is_stator, axial_vent=axial_vent, notch=notch, skew=skew, bore=bore, yoke=yoke)
         # The class is frozen (in LamSlotM init), for now it's impossible to
         # add new properties
 
@@ -328,28 +284,18 @@ class LamSlotMagNS(LamSlotM):
         # Get the properties inherited from LamSlotM
         LamSlotMagNS_str += super(LamSlotMagNS, self).__str__()
         if self.magnet_north is not None:
-            tmp = (
-                self.magnet_north.__str__()
-                .replace(linesep, linesep + "\t")
-                .rstrip("\t")
-            )
-            LamSlotMagNS_str += "magnet_north = " + tmp
+            tmp = self.magnet_north.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            LamSlotMagNS_str += "magnet_north = "+ tmp
         else:
             LamSlotMagNS_str += "magnet_north = None" + linesep + linesep
         if self.magnet_south is not None:
-            tmp = (
-                self.magnet_south.__str__()
-                .replace(linesep, linesep + "\t")
-                .rstrip("\t")
-            )
-            LamSlotMagNS_str += "magnet_south = " + tmp
+            tmp = self.magnet_south.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            LamSlotMagNS_str += "magnet_south = "+ tmp
         else:
             LamSlotMagNS_str += "magnet_south = None" + linesep + linesep
         if self.slot_south is not None:
-            tmp = (
-                self.slot_south.__str__().replace(linesep, linesep + "\t").rstrip("\t")
-            )
-            LamSlotMagNS_str += "slot_south = " + tmp
+            tmp = self.slot_south.__str__().replace(linesep, linesep + "\t").rstrip("\t")
+            LamSlotMagNS_str += "slot_south = "+ tmp
         else:
             LamSlotMagNS_str += "slot_south = None" + linesep + linesep
         return LamSlotMagNS_str
@@ -371,62 +317,31 @@ class LamSlotMagNS(LamSlotM):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from LamSlotM
-        diff_list.extend(
-            super(LamSlotMagNS, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
-        if (other.magnet_north is None and self.magnet_north is not None) or (
-            other.magnet_north is not None and self.magnet_north is None
-        ):
-            diff_list.append(name + ".magnet_north None mismatch")
+        diff_list.extend(super(LamSlotMagNS, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
+        if (other.magnet_north is None and self.magnet_north is not None) or (other.magnet_north is not None and self.magnet_north is None):
+            diff_list.append(name+'.magnet_north None mismatch')
         elif self.magnet_north is not None:
-            diff_list.extend(
-                self.magnet_north.compare(
-                    other.magnet_north,
-                    name=name + ".magnet_north",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
-        if (other.magnet_south is None and self.magnet_south is not None) or (
-            other.magnet_south is not None and self.magnet_south is None
-        ):
-            diff_list.append(name + ".magnet_south None mismatch")
+            diff_list.extend(self.magnet_north.compare(other.magnet_north,name=name+'.magnet_north',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.magnet_south is None and self.magnet_south is not None) or (other.magnet_south is not None and self.magnet_south is None):
+            diff_list.append(name+'.magnet_south None mismatch')
         elif self.magnet_south is not None:
-            diff_list.extend(
-                self.magnet_south.compare(
-                    other.magnet_south,
-                    name=name + ".magnet_south",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
-        if (other.slot_south is None and self.slot_south is not None) or (
-            other.slot_south is not None and self.slot_south is None
-        ):
-            diff_list.append(name + ".slot_south None mismatch")
+            diff_list.extend(self.magnet_south.compare(other.magnet_south,name=name+'.magnet_south',ignore_list=ignore_list,is_add_value=is_add_value))
+        if (other.slot_south is None and self.slot_south is not None) or (other.slot_south is not None and self.slot_south is None):
+            diff_list.append(name+'.slot_south None mismatch')
         elif self.slot_south is not None:
-            diff_list.extend(
-                self.slot_south.compare(
-                    other.slot_south,
-                    name=name + ".slot_south",
-                    ignore_list=ignore_list,
-                    is_add_value=is_add_value,
-                )
-            )
+            diff_list.extend(self.slot_south.compare(other.slot_south,name=name+'.slot_south',ignore_list=ignore_list,is_add_value=is_add_value))
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -448,44 +363,29 @@ class LamSlotMagNS(LamSlotM):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from LamSlotM
-        LamSlotMagNS_dict = super(LamSlotMagNS, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        LamSlotMagNS_dict = super(LamSlotMagNS, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.magnet_north is None:
             LamSlotMagNS_dict["magnet_north"] = None
         else:
-            LamSlotMagNS_dict["magnet_north"] = self.magnet_north.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            LamSlotMagNS_dict["magnet_north"] = self.magnet_north.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.magnet_south is None:
             LamSlotMagNS_dict["magnet_south"] = None
         else:
-            LamSlotMagNS_dict["magnet_south"] = self.magnet_south.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            LamSlotMagNS_dict["magnet_south"] = self.magnet_south.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.slot_south is None:
             LamSlotMagNS_dict["slot_south"] = None
         else:
-            LamSlotMagNS_dict["slot_south"] = self.slot_south.as_dict(
-                type_handle_ndarray=type_handle_ndarray,
-                keep_function=keep_function,
-                **kwargs
-            )
+            LamSlotMagNS_dict["slot_south"] = self.slot_south.as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         # The class name is added to the dict for deserialisation purpose
         # Overwrite the mother class name
         LamSlotMagNS_dict["__class__"] = "LamSlotMagNS"
         return LamSlotMagNS_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -552,28 +452,7 @@ class LamSlotMagNS(LamSlotM):
         else:
             yoke_val = self.yoke.copy()
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            magnet_north=magnet_north_val,
-            magnet_south=magnet_south_val,
-            slot_south=slot_south_val,
-            mur_lin_matrix=mur_lin_matrix_val,
-            Brm20_matrix=Brm20_matrix_val,
-            slot=slot_val,
-            L1=L1_val,
-            mat_type=mat_type_val,
-            Nrvd=Nrvd_val,
-            Wrvd=Wrvd_val,
-            Kf1=Kf1_val,
-            is_internal=is_internal_val,
-            Rint=Rint_val,
-            Rext=Rext_val,
-            is_stator=is_stator_val,
-            axial_vent=axial_vent_val,
-            notch=notch_val,
-            skew=skew_val,
-            bore=bore_val,
-            yoke=yoke_val,
-        )
+        obj_copy = type(self)(magnet_north=magnet_north_val,magnet_south=magnet_south_val,slot_south=slot_south_val,mur_lin_matrix=mur_lin_matrix_val,Brm20_matrix=Brm20_matrix_val,slot=slot_val,L1=L1_val,mat_type=mat_type_val,Nrvd=Nrvd_val,Wrvd=Wrvd_val,Kf1=Kf1_val,is_internal=is_internal_val,Rint=Rint_val,Rext=Rext_val,is_stator=is_stator_val,axial_vent=axial_vent_val,notch=notch_val,skew=skew_val,bore=bore_val,yoke=yoke_val)
         return obj_copy
 
     def _set_None(self):
@@ -598,28 +477,23 @@ class LamSlotMagNS(LamSlotM):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "magnet_north"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'magnet_north')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Magnet = import_class("pyleecan.Classes", "Magnet", "magnet_north")
+            Magnet = import_class('pyleecan.Classes', 'Magnet', 'magnet_north')
             value = Magnet()
         check_var("magnet_north", value, "Magnet")
         self._magnet_north = value
 
         if self._magnet_north is not None:
             self._magnet_north.parent = self
-
     magnet_north = property(
         fget=_get_magnet_north,
         fset=_set_magnet_north,
-        doc="""North Magnet of the lamination
+        doc=u"""North Magnet of the lamination
 
         :Type: Magnet
         """,
@@ -635,28 +509,23 @@ class LamSlotMagNS(LamSlotM):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "magnet_south"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'magnet_south')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Magnet = import_class("pyleecan.Classes", "Magnet", "magnet_south")
+            Magnet = import_class('pyleecan.Classes', 'Magnet', 'magnet_south')
             value = Magnet()
         check_var("magnet_south", value, "Magnet")
         self._magnet_south = value
 
         if self._magnet_south is not None:
             self._magnet_south.parent = self
-
     magnet_south = property(
         fget=_get_magnet_south,
         fset=_set_magnet_south,
-        doc="""South Magnet of the lamination
+        doc=u"""South Magnet of the lamination
 
         :Type: Magnet
         """,
@@ -672,28 +541,23 @@ class LamSlotMagNS(LamSlotM):
             try:
                 value = load_init_dict(value)[1]
             except Exception as e:
-                self.get_logger().error(
-                    "Error while loading " + value + ", setting None instead"
-                )
+                self.get_logger().error('Error while loading '+value+', setting None instead')
                 value = None
-        if isinstance(value, dict) and "__class__" in value:
-            class_obj = import_class(
-                "pyleecan.Classes", value.get("__class__"), "slot_south"
-            )
+        if isinstance(value, dict) and '__class__' in value:
+            class_obj = import_class('pyleecan.Classes', value.get('__class__'), 'slot_south')
             value = class_obj(init_dict=value)
         elif type(value) is int and value == -1:  # Default constructor
-            Slot = import_class("pyleecan.Classes", "Slot", "slot_south")
+            Slot = import_class('pyleecan.Classes', 'Slot', 'slot_south')
             value = Slot()
         check_var("slot_south", value, "Slot")
         self._slot_south = value
 
         if self._slot_south is not None:
             self._slot_south.parent = self
-
     slot_south = property(
         fget=_get_slot_south,
         fset=_set_slot_south,
-        doc="""South slot of the lamination
+        doc=u"""South slot of the lamination
 
         :Type: Slot
         """,

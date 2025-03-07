@@ -66,16 +66,7 @@ class RuleSimple(Rule):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        other_key_list=None,
-        P_obj_path=None,
-        scaling_to_P=1,
-        file_name=None,
-        unit_type="m",
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, other_key_list=None, P_obj_path=None, scaling_to_P=1, file_name=None, unit_type="m", init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -117,12 +108,7 @@ class RuleSimple(Rule):
         RuleSimple_str = ""
         # Get the properties inherited from Rule
         RuleSimple_str += super(RuleSimple, self).__str__()
-        RuleSimple_str += (
-            "other_key_list = "
-            + linesep
-            + str(self.other_key_list).replace(linesep, linesep + "\t")
-            + linesep
-        )
+        RuleSimple_str += "other_key_list = " + linesep + str(self.other_key_list).replace(linesep, linesep + "\t") + linesep
         RuleSimple_str += 'P_obj_path = "' + str(self.P_obj_path) + '"' + linesep
         RuleSimple_str += "scaling_to_P = " + str(self.scaling_to_P) + linesep
         RuleSimple_str += 'file_name = "' + str(self.file_name) + '"' + linesep
@@ -147,78 +133,45 @@ class RuleSimple(Rule):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Rule
-        diff_list.extend(
-            super(RuleSimple, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
+        diff_list.extend(super(RuleSimple, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
         if other._other_key_list != self._other_key_list:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._other_key_list)
-                    + ", other="
-                    + str(other._other_key_list)
-                    + ")"
-                )
-                diff_list.append(name + ".other_key_list" + val_str)
+                val_str = ' (self='+str(self._other_key_list)+', other='+str(other._other_key_list)+')'
+                diff_list.append(name+'.other_key_list'+val_str)
             else:
-                diff_list.append(name + ".other_key_list")
+                diff_list.append(name+'.other_key_list')
         if other._P_obj_path != self._P_obj_path:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._P_obj_path)
-                    + ", other="
-                    + str(other._P_obj_path)
-                    + ")"
-                )
-                diff_list.append(name + ".P_obj_path" + val_str)
+                val_str = ' (self='+str(self._P_obj_path)+', other='+str(other._P_obj_path)+')'
+                diff_list.append(name+'.P_obj_path'+val_str)
             else:
-                diff_list.append(name + ".P_obj_path")
-        if (
-            other._scaling_to_P is not None
-            and self._scaling_to_P is not None
-            and isnan(other._scaling_to_P)
-            and isnan(self._scaling_to_P)
-        ):
+                diff_list.append(name+'.P_obj_path')
+        if other._scaling_to_P is not None and self._scaling_to_P is not None and isnan(other._scaling_to_P) and isnan(self._scaling_to_P):
             pass
         elif other._scaling_to_P != self._scaling_to_P:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._scaling_to_P)
-                    + ", other="
-                    + str(other._scaling_to_P)
-                    + ")"
-                )
-                diff_list.append(name + ".scaling_to_P" + val_str)
+                val_str = ' (self='+str(self._scaling_to_P)+', other='+str(other._scaling_to_P)+')'
+                diff_list.append(name+'.scaling_to_P'+val_str)
             else:
-                diff_list.append(name + ".scaling_to_P")
+                diff_list.append(name+'.scaling_to_P')
         if other._file_name != self._file_name:
             if is_add_value:
-                val_str = (
-                    " (self="
-                    + str(self._file_name)
-                    + ", other="
-                    + str(other._file_name)
-                    + ")"
-                )
-                diff_list.append(name + ".file_name" + val_str)
+                val_str = ' (self='+str(self._file_name)+', other='+str(other._file_name)+')'
+                diff_list.append(name+'.file_name'+val_str)
             else:
-                diff_list.append(name + ".file_name")
+                diff_list.append(name+'.file_name')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -243,16 +196,12 @@ class RuleSimple(Rule):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Rule
-        RuleSimple_dict = super(RuleSimple, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        RuleSimple_dict = super(RuleSimple, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         RuleSimple_dict["other_key_list"] = (
             self.other_key_list.copy() if self.other_key_list is not None else None
         )
@@ -263,6 +212,7 @@ class RuleSimple(Rule):
         # Overwrite the mother class name
         RuleSimple_dict["__class__"] = "RuleSimple"
         return RuleSimple_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -277,13 +227,7 @@ class RuleSimple(Rule):
         file_name_val = self.file_name
         unit_type_val = self.unit_type
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            other_key_list=other_key_list_val,
-            P_obj_path=P_obj_path_val,
-            scaling_to_P=scaling_to_P_val,
-            file_name=file_name_val,
-            unit_type=unit_type_val,
-        )
+        obj_copy = type(self)(other_key_list=other_key_list_val,P_obj_path=P_obj_path_val,scaling_to_P=scaling_to_P_val,file_name=file_name_val,unit_type=unit_type_val)
         return obj_copy
 
     def _set_None(self):
@@ -310,7 +254,7 @@ class RuleSimple(Rule):
     other_key_list = property(
         fget=_get_other_key_list,
         fset=_set_other_key_list,
-        doc="""parameter 
+        doc=u"""parameter 
 
         :Type: list
         """,
@@ -328,7 +272,7 @@ class RuleSimple(Rule):
     P_obj_path = property(
         fget=_get_P_obj_path,
         fset=_set_P_obj_path,
-        doc="""path pyleecan parameter in object machine 
+        doc=u"""path pyleecan parameter in object machine 
 
         :Type: str
         """,
@@ -346,7 +290,7 @@ class RuleSimple(Rule):
     scaling_to_P = property(
         fget=_get_scaling_to_P,
         fset=_set_scaling_to_P,
-        doc="""conversion paramter to pyleecan
+        doc=u"""conversion paramter to pyleecan
 
         :Type: float
         """,
@@ -364,7 +308,7 @@ class RuleSimple(Rule):
     file_name = property(
         fget=_get_file_name,
         fset=_set_file_name,
-        doc="""use just to debug, give name of file
+        doc=u"""use just to debug, give name of file
 
         :Type: str
         """,

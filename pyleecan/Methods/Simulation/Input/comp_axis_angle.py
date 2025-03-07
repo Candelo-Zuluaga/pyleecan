@@ -27,9 +27,7 @@ def comp_axis_angle(self, p, Rag, per_a=None, is_antiper_a=None, Angle_in=None):
         Requested axis angle
 
     """
-
     norm_angle = {"space_order": Norm_ref(ref=p), "distance": Norm_ref(ref=1 / Rag)}
-
     # Compute angle axis based on input one
     if Angle_in is not None:
         if per_a is None or is_antiper_a is None:
@@ -71,5 +69,5 @@ def comp_axis_angle(self, p, Rag, per_a=None, is_antiper_a=None, Angle_in=None):
             sym_a["period"] = per_a
         Angle.symmetries = sym_a
         Angle = Angle.to_linspace()
-
+    #print(Angle_in is not None,self.angle is None, Angle.get_periodicity(),self.Na_tot,norm_angle)
     return Angle

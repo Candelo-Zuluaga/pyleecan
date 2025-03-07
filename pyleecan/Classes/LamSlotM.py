@@ -98,28 +98,7 @@ class LamSlotM(LamSlot):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        mur_lin_matrix=None,
-        Brm20_matrix=None,
-        slot=-1,
-        L1=0.35,
-        mat_type=-1,
-        Nrvd=0,
-        Wrvd=0,
-        Kf1=0.95,
-        is_internal=True,
-        Rint=0,
-        Rext=1,
-        is_stator=True,
-        axial_vent=-1,
-        notch=-1,
-        skew=None,
-        bore=None,
-        yoke=None,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, mur_lin_matrix=None, Brm20_matrix=None, slot=-1, L1=0.35, mat_type=-1, Nrvd=0, Wrvd=0, Kf1=0.95, is_internal=True, Rint=0, Rext=1, is_stator=True, axial_vent=-1, notch=-1, skew=None, bore=None, yoke=None, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -173,23 +152,7 @@ class LamSlotM(LamSlot):
         self.mur_lin_matrix = mur_lin_matrix
         self.Brm20_matrix = Brm20_matrix
         # Call LamSlot init
-        super(LamSlotM, self).__init__(
-            slot=slot,
-            L1=L1,
-            mat_type=mat_type,
-            Nrvd=Nrvd,
-            Wrvd=Wrvd,
-            Kf1=Kf1,
-            is_internal=is_internal,
-            Rint=Rint,
-            Rext=Rext,
-            is_stator=is_stator,
-            axial_vent=axial_vent,
-            notch=notch,
-            skew=skew,
-            bore=bore,
-            yoke=yoke,
-        )
+        super(LamSlotM, self).__init__(slot=slot, L1=L1, mat_type=mat_type, Nrvd=Nrvd, Wrvd=Wrvd, Kf1=Kf1, is_internal=is_internal, Rint=Rint, Rext=Rext, is_stator=is_stator, axial_vent=axial_vent, notch=notch, skew=skew, bore=bore, yoke=yoke)
         # The class is frozen (in LamSlot init), for now it's impossible to
         # add new properties
 
@@ -199,20 +162,8 @@ class LamSlotM(LamSlot):
         LamSlotM_str = ""
         # Get the properties inherited from LamSlot
         LamSlotM_str += super(LamSlotM, self).__str__()
-        LamSlotM_str += (
-            "mur_lin_matrix = "
-            + linesep
-            + str(self.mur_lin_matrix).replace(linesep, linesep + "\t")
-            + linesep
-            + linesep
-        )
-        LamSlotM_str += (
-            "Brm20_matrix = "
-            + linesep
-            + str(self.Brm20_matrix).replace(linesep, linesep + "\t")
-            + linesep
-            + linesep
-        )
+        LamSlotM_str += "mur_lin_matrix = " + linesep + str(self.mur_lin_matrix).replace(linesep, linesep + "\t") + linesep + linesep
+        LamSlotM_str += "Brm20_matrix = " + linesep + str(self.Brm20_matrix).replace(linesep, linesep + "\t") + linesep + linesep
         return LamSlotM_str
 
     def __eq__(self, other):
@@ -230,27 +181,23 @@ class LamSlotM(LamSlot):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from LamSlot
-        diff_list.extend(
-            super(LamSlotM, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
+        diff_list.extend(super(LamSlotM, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
         if not array_equal(other.mur_lin_matrix, self.mur_lin_matrix):
-            diff_list.append(name + ".mur_lin_matrix")
+            diff_list.append(name+'.mur_lin_matrix')
         if not array_equal(other.Brm20_matrix, self.Brm20_matrix):
-            diff_list.append(name + ".Brm20_matrix")
+            diff_list.append(name+'.Brm20_matrix')
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -271,46 +218,39 @@ class LamSlotM(LamSlot):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from LamSlot
-        LamSlotM_dict = super(LamSlotM, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        LamSlotM_dict = super(LamSlotM, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         if self.mur_lin_matrix is None:
             LamSlotM_dict["mur_lin_matrix"] = None
         else:
-            if type_handle_ndarray == 0:
+            if type_handle_ndarray==0:
                 LamSlotM_dict["mur_lin_matrix"] = self.mur_lin_matrix.tolist()
-            elif type_handle_ndarray == 1:
+            elif type_handle_ndarray==1:
                 LamSlotM_dict["mur_lin_matrix"] = self.mur_lin_matrix.copy()
-            elif type_handle_ndarray == 2:
+            elif type_handle_ndarray==2:
                 LamSlotM_dict["mur_lin_matrix"] = self.mur_lin_matrix
             else:
-                raise Exception(
-                    "Unknown type_handle_ndarray: " + str(type_handle_ndarray)
-                )
+                raise Exception ('Unknown type_handle_ndarray: '+str(type_handle_ndarray))
         if self.Brm20_matrix is None:
             LamSlotM_dict["Brm20_matrix"] = None
         else:
-            if type_handle_ndarray == 0:
+            if type_handle_ndarray==0:
                 LamSlotM_dict["Brm20_matrix"] = self.Brm20_matrix.tolist()
-            elif type_handle_ndarray == 1:
+            elif type_handle_ndarray==1:
                 LamSlotM_dict["Brm20_matrix"] = self.Brm20_matrix.copy()
-            elif type_handle_ndarray == 2:
+            elif type_handle_ndarray==2:
                 LamSlotM_dict["Brm20_matrix"] = self.Brm20_matrix
             else:
-                raise Exception(
-                    "Unknown type_handle_ndarray: " + str(type_handle_ndarray)
-                )
+                raise Exception ('Unknown type_handle_ndarray: '+str(type_handle_ndarray))
         # The class name is added to the dict for deserialisation purpose
         # Overwrite the mother class name
         LamSlotM_dict["__class__"] = "LamSlotM"
         return LamSlotM_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -365,25 +305,7 @@ class LamSlotM(LamSlot):
         else:
             yoke_val = self.yoke.copy()
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            mur_lin_matrix=mur_lin_matrix_val,
-            Brm20_matrix=Brm20_matrix_val,
-            slot=slot_val,
-            L1=L1_val,
-            mat_type=mat_type_val,
-            Nrvd=Nrvd_val,
-            Wrvd=Wrvd_val,
-            Kf1=Kf1_val,
-            is_internal=is_internal_val,
-            Rint=Rint_val,
-            Rext=Rext_val,
-            is_stator=is_stator_val,
-            axial_vent=axial_vent_val,
-            notch=notch_val,
-            skew=skew_val,
-            bore=bore_val,
-            yoke=yoke_val,
-        )
+        obj_copy = type(self)(mur_lin_matrix=mur_lin_matrix_val,Brm20_matrix=Brm20_matrix_val,slot=slot_val,L1=L1_val,mat_type=mat_type_val,Nrvd=Nrvd_val,Wrvd=Wrvd_val,Kf1=Kf1_val,is_internal=is_internal_val,Rint=Rint_val,Rext=Rext_val,is_stator=is_stator_val,axial_vent=axial_vent_val,notch=notch_val,skew=skew_val,bore=bore_val,yoke=yoke_val)
         return obj_copy
 
     def _set_None(self):
@@ -413,7 +335,7 @@ class LamSlotM(LamSlot):
     mur_lin_matrix = property(
         fget=_get_mur_lin_matrix,
         fset=_set_mur_lin_matrix,
-        doc="""Matrix to enforce a different relative magnetic permeability for each magnet layer (shape: [Nrad, Ntan, Zs])
+        doc=u"""Matrix to enforce a different relative magnetic permeability for each magnet layer (shape: [Nrad, Ntan, Zs])
 
         :Type: ndarray
         """,
@@ -438,7 +360,7 @@ class LamSlotM(LamSlot):
     Brm20_matrix = property(
         fget=_get_Brm20_matrix,
         fset=_set_Brm20_matrix,
-        doc="""Matrix to enforce a different magnet remanence induction at 20degC for each magnet layer (shape: [Nrad, Ntan, Zs])
+        doc=u"""Matrix to enforce a different magnet remanence induction at 20degC for each magnet layer (shape: [Nrad, Ntan, Zs])
 
         :Type: ndarray
         """,

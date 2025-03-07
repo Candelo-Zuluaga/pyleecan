@@ -18,436 +18,312 @@ from .Convert import Convert
 # Import all class method
 # Try/catch to remove unnecessary dependencies in unused method
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_other_to_dict import (
-        convert_other_to_dict,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_other_to_dict import convert_other_to_dict
 except ImportError as error:
     convert_other_to_dict = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_slot_to_P import (
-        convert_slot_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_slot_to_P import convert_slot_to_P
 except ImportError as error:
     convert_slot_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_slot_rotor_to_P import (
-        convert_slot_rotor_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_slot_rotor_to_P import convert_slot_rotor_to_P
 except ImportError as error:
     convert_slot_rotor_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_machine_to_P import (
-        convert_machine_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_machine_to_P import convert_machine_to_P
 except ImportError as error:
     convert_machine_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_magnet_to_P import (
-        convert_magnet_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_magnet_to_P import convert_magnet_to_P
 except ImportError as error:
     convert_magnet_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_hole_to_P import (
-        convert_hole_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_hole_to_P import convert_hole_to_P
 except ImportError as error:
     convert_hole_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_pole_to_P import (
-        convert_pole_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_pole_to_P import convert_pole_to_P
 except ImportError as error:
     convert_pole_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_duct_to_P import (
-        convert_duct_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_duct_to_P import convert_duct_to_P
 except ImportError as error:
     convert_duct_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_notch_to_P import (
-        convert_notch_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_notch_to_P import convert_notch_to_P
 except ImportError as error:
     convert_notch_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_conductor_to_P import (
-        convert_conductor_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_conductor_to_P import convert_conductor_to_P
 except ImportError as error:
     convert_conductor_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_material_to_P import (
-        convert_material_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_material_to_P import convert_material_to_P
 except ImportError as error:
     convert_material_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_P.convert_skew_to_P import (
-        convert_skew_to_P,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_P.convert_skew_to_P import convert_skew_to_P
 except ImportError as error:
     convert_skew_to_P = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_slot_rotor_to_other import (
-        convert_slot_rotor_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_slot_rotor_to_other import convert_slot_rotor_to_other
 except ImportError as error:
     convert_slot_rotor_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.init_other_unit import (
-        init_other_unit,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.init_other_unit import init_other_unit
 except ImportError as error:
     init_other_unit = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_slot_to_other import (
-        convert_slot_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_slot_to_other import convert_slot_to_other
 except ImportError as error:
     convert_slot_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_machine_to_other import (
-        convert_machine_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_machine_to_other import convert_machine_to_other
 except ImportError as error:
     convert_machine_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_magnet_to_other import (
-        convert_magnet_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_magnet_to_other import convert_magnet_to_other
 except ImportError as error:
     convert_magnet_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_hole_to_other import (
-        convert_hole_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_hole_to_other import convert_hole_to_other
 except ImportError as error:
     convert_hole_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_duct_to_other import (
-        convert_duct_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_duct_to_other import convert_duct_to_other
 except ImportError as error:
     convert_duct_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_notch_to_other import (
-        convert_notch_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_notch_to_other import convert_notch_to_other
 except ImportError as error:
     convert_notch_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_pole_to_other import (
-        convert_pole_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_pole_to_other import convert_pole_to_other
 except ImportError as error:
     convert_pole_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_conductor_to_other import (
-        convert_conductor_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_conductor_to_other import convert_conductor_to_other
 except ImportError as error:
     convert_conductor_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_material_to_other import (
-        convert_material_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_material_to_other import convert_material_to_other
 except ImportError as error:
     convert_material_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.convert_to_other.convert_skew_to_other import (
-        convert_skew_to_other,
-    )
+    from ..Methods.Converter.ConvertMC.convert_to_other.convert_skew_to_other import convert_skew_to_other
 except ImportError as error:
     convert_skew_to_other = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_dimension import (
-        add_rule_machine_dimension,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_dimension import add_rule_machine_dimension
 except ImportError as error:
     add_rule_machine_dimension = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_dimension_surface_magnet import (
-        add_rule_machine_dimension_surface_magnet,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_dimension_surface_magnet import add_rule_machine_dimension_surface_magnet
 except ImportError as error:
     add_rule_machine_dimension_surface_magnet = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_type import (
-        add_rule_machine_type,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.add_rule_machine_type import add_rule_machine_type
 except ImportError as error:
     add_rule_machine_type = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW11 import (
-        add_rule_slotW11,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW11 import add_rule_slotW11
 except ImportError as error:
     add_rule_slotW11 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW29 import (
-        add_rule_slotW29,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW29 import add_rule_slotW29
 except ImportError as error:
     add_rule_slotW29 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW21 import (
-        add_rule_slotW21,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW21 import add_rule_slotW21
 except ImportError as error:
     add_rule_slotW21 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW14 import (
-        add_rule_slotW14,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW14 import add_rule_slotW14
 except ImportError as error:
     add_rule_slotW14 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW23 import (
-        add_rule_slotW23,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.add_rule_slotW23 import add_rule_slotW23
 except ImportError as error:
     add_rule_slotW23 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW30 import (
-        add_rule_rotor_slotW30,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW30 import add_rule_rotor_slotW30
 except ImportError as error:
     add_rule_rotor_slotW30 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW23 import (
-        add_rule_rotor_slotW23,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW23 import add_rule_rotor_slotW23
 except ImportError as error:
     add_rule_rotor_slotW23 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW11_2 import (
-        add_rule_rotor_slotW11_2,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW11_2 import add_rule_rotor_slotW11_2
 except ImportError as error:
     add_rule_rotor_slotW11_2 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW26 import (
-        add_rule_rotor_slotW26,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Slot.rotor.add_rule_rotor_slotW26 import add_rule_rotor_slotW26
 except ImportError as error:
     add_rule_rotor_slotW26 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationCirc import (
-        add_rule_ventilationCirc,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationCirc import add_rule_ventilationCirc
 except ImportError as error:
     add_rule_ventilationCirc = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationPolar import (
-        add_rule_ventilationPolar,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationPolar import add_rule_ventilationPolar
 except ImportError as error:
     add_rule_ventilationPolar = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationTrap import (
-        add_rule_ventilationTrap,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_ventilationTrap import add_rule_ventilationTrap
 except ImportError as error:
     add_rule_ventilationTrap = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_notch_slotM19 import (
-        add_rule_notch_slotM19,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_notch_slotM19 import add_rule_notch_slotM19
 except ImportError as error:
     add_rule_notch_slotM19 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_lamination import (
-        add_rule_lamination,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Lamination.add_rule_lamination import add_rule_lamination
 except ImportError as error:
     add_rule_lamination = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM14 import (
-        add_rule_slotM14,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM14 import add_rule_slotM14
 except ImportError as error:
     add_rule_slotM14 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM13 import (
-        add_rule_slotM13,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM13 import add_rule_slotM13
 except ImportError as error:
     add_rule_slotM13 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM16 import (
-        add_rule_slotM16,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM16 import add_rule_slotM16
 except ImportError as error:
     add_rule_slotM16 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM11 import (
-        add_rule_slotM11,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM11 import add_rule_slotM11
 except ImportError as error:
     add_rule_slotM11 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM15 import (
-        add_rule_slotM15,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM15 import add_rule_slotM15
 except ImportError as error:
     add_rule_slotM15 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM12 import (
-        add_rule_slotM12,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Rotor_Magnet.add_rule_slotM12 import add_rule_slotM12
 except ImportError as error:
     add_rule_slotM12 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.select_SIPMSM_machine_dimension import (
-        select_SIPMSM_machine_dimension,
-    )
+    from ..Methods.Converter.ConvertMC.select_SIPMSM_machine_dimension import select_SIPMSM_machine_dimension
 except ImportError as error:
     select_SIPMSM_machine_dimension = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM61 import (
-        add_rule_holeM61,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM61 import add_rule_holeM61
 except ImportError as error:
     add_rule_holeM61 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM57 import (
-        add_rule_holeM57,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM57 import add_rule_holeM57
 except ImportError as error:
     add_rule_holeM57 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM60 import (
-        add_rule_holeM60,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM60 import add_rule_holeM60
 except ImportError as error:
     add_rule_holeM60 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM63 import (
-        add_rule_holeM63,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM63 import add_rule_holeM63
 except ImportError as error:
     add_rule_holeM63 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM52 import (
-        add_rule_holeM52,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM52 import add_rule_holeM52
 except ImportError as error:
     add_rule_holeM52 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM62 import (
-        add_rule_holeM62,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Hole.add_rule_holeM62 import add_rule_holeM62
 except ImportError as error:
     add_rule_holeM62 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_parallel_tooth_slotW63 import (
-        add_rule_parallel_tooth_slotW63,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_parallel_tooth_slotW63 import add_rule_parallel_tooth_slotW63
 except ImportError as error:
     add_rule_parallel_tooth_slotW63 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_salient_pole_slotW62 import (
-        add_rule_salient_pole_slotW62,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_salient_pole_slotW62 import add_rule_salient_pole_slotW62
 except ImportError as error:
     add_rule_salient_pole_slotW62 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_parallel_slot_slotW29 import (
-        add_rule_parallel_slot_slotW29,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Pole.add_rule_parallel_slot_slotW29 import add_rule_parallel_slot_slotW29
 except ImportError as error:
     add_rule_parallel_slot_slotW29 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_winding import (
-        add_rule_winding,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_winding import add_rule_winding
 except ImportError as error:
     add_rule_winding = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_condtype11 import (
-        add_rule_condtype11,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_condtype11 import add_rule_condtype11
 except ImportError as error:
     add_rule_condtype11 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_condtype12 import (
-        add_rule_condtype12,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_condtype12 import add_rule_condtype12
 except ImportError as error:
     add_rule_condtype12 = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_rotor_bar import (
-        add_rule_rotor_bar,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.Winding.add_rule_rotor_bar import add_rule_rotor_bar
 except ImportError as error:
     add_rule_rotor_bar = error
 
 try:
-    from ..Methods.Converter.ConvertMC.Rules.add_rule_material_magnetics import (
-        add_rule_material_magnetics,
-    )
+    from ..Methods.Converter.ConvertMC.Rules.add_rule_material_magnetics import add_rule_material_magnetics
 except ImportError as error:
     add_rule_material_magnetics = error
 
@@ -633,8 +509,7 @@ class ConvertMC(Convert):
         init_other_unit = property(
             fget=lambda x: raise_(
                 ImportError(
-                    "Can't use ConvertMC method init_other_unit: "
-                    + str(init_other_unit)
+                    "Can't use ConvertMC method init_other_unit: " + str(init_other_unit)
                 )
             )
         )
@@ -783,9 +658,7 @@ class ConvertMC(Convert):
             )
         )
     else:
-        add_rule_machine_dimension_surface_magnet = (
-            add_rule_machine_dimension_surface_magnet
-        )
+        add_rule_machine_dimension_surface_magnet = add_rule_machine_dimension_surface_magnet
     # cf Methods.Converter.ConvertMC.Rules.add_rule_machine_type
     if isinstance(add_rule_machine_type, ImportError):
         add_rule_machine_type = property(
@@ -1246,16 +1119,7 @@ class ConvertMC(Convert):
     # get_logger method is available in all object
     get_logger = get_logger
 
-    def __init__(
-        self,
-        other_unit_dict=-1,
-        other_dict=-1,
-        machine=None,
-        rules_list=-1,
-        is_P_to_other=False,
-        init_dict=None,
-        init_str=None,
-    ):
+    def __init__(self, other_unit_dict=-1, other_dict=-1, machine=None, rules_list=-1, is_P_to_other=False, init_dict = None, init_str = None):
         """Constructor of the class. Can be use in three ways :
         - __init__ (arg1 = 1, arg3 = 5) every parameters have name and default values
             for pyleecan type, -1 will call the default constructor
@@ -1283,13 +1147,7 @@ class ConvertMC(Convert):
                 is_P_to_other = init_dict["is_P_to_other"]
         # Set the properties (value check and convertion are done in setter)
         # Call Convert init
-        super(ConvertMC, self).__init__(
-            other_unit_dict=other_unit_dict,
-            other_dict=other_dict,
-            machine=machine,
-            rules_list=rules_list,
-            is_P_to_other=is_P_to_other,
-        )
+        super(ConvertMC, self).__init__(other_unit_dict=other_unit_dict, other_dict=other_dict, machine=machine, rules_list=rules_list, is_P_to_other=is_P_to_other)
         # The class is frozen (in Convert init), for now it's impossible to
         # add new properties
 
@@ -1312,23 +1170,19 @@ class ConvertMC(Convert):
             return False
         return True
 
-    def compare(self, other, name="self", ignore_list=None, is_add_value=False):
+    def compare(self, other, name='self', ignore_list=None, is_add_value=False):
         """Compare two objects and return list of differences"""
 
         if ignore_list is None:
             ignore_list = list()
         if type(other) != type(self):
-            return ["type(" + name + ")"]
+            return ['type('+name+')']
         diff_list = list()
 
         # Check the properties inherited from Convert
-        diff_list.extend(
-            super(ConvertMC, self).compare(
-                other, name=name, ignore_list=ignore_list, is_add_value=is_add_value
-            )
-        )
+        diff_list.extend(super(ConvertMC, self).compare(other,name=name, ignore_list=ignore_list, is_add_value=is_add_value))
         # Filter ignore differences
-        diff_list = list(filter(lambda x: x not in ignore_list, diff_list))
+        diff_list = list(filter(lambda x : x not in ignore_list, diff_list))
         return diff_list
 
     def __sizeof__(self):
@@ -1347,20 +1201,17 @@ class ConvertMC(Convert):
             How to handle ndarray (0: tolist, 1: copy, 2: nothing)
         keep_function : bool
             True to keep the function object, else return str
-        Optional keyword input parameter is for internal use only
+        Optional keyword input parameter is for internal use only 
         and may prevent json serializability.
         """
 
         # Get the properties inherited from Convert
-        ConvertMC_dict = super(ConvertMC, self).as_dict(
-            type_handle_ndarray=type_handle_ndarray,
-            keep_function=keep_function,
-            **kwargs
-        )
+        ConvertMC_dict = super(ConvertMC, self).as_dict(type_handle_ndarray=type_handle_ndarray, keep_function=keep_function, **kwargs)
         # The class name is added to the dict for deserialisation purpose
         # Overwrite the mother class name
         ConvertMC_dict["__class__"] = "ConvertMC"
         return ConvertMC_dict
+
 
     def copy(self):
         """Creates a deepcopy of the object"""
@@ -1384,13 +1235,7 @@ class ConvertMC(Convert):
             rules_list_val = self.rules_list.copy()
         is_P_to_other_val = self.is_P_to_other
         # Creates new object of the same type with the copied properties
-        obj_copy = type(self)(
-            other_unit_dict=other_unit_dict_val,
-            other_dict=other_dict_val,
-            machine=machine_val,
-            rules_list=rules_list_val,
-            is_P_to_other=is_P_to_other_val,
-        )
+        obj_copy = type(self)(other_unit_dict=other_unit_dict_val,other_dict=other_dict_val,machine=machine_val,rules_list=rules_list_val,is_P_to_other=is_P_to_other_val)
         return obj_copy
 
     def _set_None(self):
